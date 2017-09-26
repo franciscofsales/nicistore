@@ -50,11 +50,12 @@
 
 .desktop-header__logo {
     width: 100%;
-    min-width: 129px;
-    max-width: 129px;
+    min-width: 47px;
+    max-width: 47px;
     height: 47px;
-    background: url('../../../../../static/logo.png');
+    background: url('../../../../../static/diccilogo.png');
     background-size: 100%;
+    align-self: center;
 }
 
 .desktop-header__logo-link {

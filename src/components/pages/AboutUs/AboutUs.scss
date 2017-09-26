@@ -1,0 +1,46 @@
+@import '../../../styles/mixins/breakpoints';
+@import '../../../styles/variables.scss';
+
+.aboutus-page {
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+.aboutus__content {
+    margin-top: 1px;
+}
+
+.aboutus__block {
+
+    @include breakpoint(wide-screens) {
+        width: 100%;
+    }
+
+    &:not(:last-child) {
+        padding-bottom: 15px;
+    }
+
+    &:not(:first-child) {
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    a {
+        color: $color-primary;
+    }
+}
+
+.aboutus__schedule,
+.aboutus__contacts{
+    font-family: $font-family-body;
+    font-size: $font-size-small;
+    color: $color-body;
+}
+
+.aboutus__schedule {
+    margin-top: 15px;
+}
+
+.aboutus__contacts {
+    margin-top: 5px;
+}

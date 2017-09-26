@@ -44,12 +44,9 @@ class Footer extends React.Component {
         let intlStore = this.context.getStore(IntlStore);
         let routeParams = {locale: intlStore.getCurrentLocale()};
 
-        // Stores
-        let storeLinks = [
-            {name: 'Arrábida Shopping', link: {to: 'stores', params: routeParams}},
-            {name: 'Mar Shopping', link: {to: 'stores', params: routeParams}},
-            {name: 'Loja Foz', link: {to: 'stores', params: routeParams}},
-            {name: 'Loja Outlet', link: {to: 'stores', params: routeParams}}
+        // AboutUs
+        let aboutUsLink = [
+            {name: 'About us', link: {to: 'aboutus', params: routeParams}},
         ];
 
         // Info links
@@ -85,13 +82,13 @@ class Footer extends React.Component {
                             <div className="footer__block-title">
                                 <Heading size="small">
                                     <FormattedMessage
-                                        message={intlStore.getMessage(intlData, 'storesTitle')}
+                                        message={intlStore.getMessage(intlData, 'theCompanyTitle')}
                                         locales={intlStore.getCurrentLocale()} />
                                 </Heading>
                             </div>
                             <div className="footer__block-content">
                                 <ul>
-                                    {blockItems(storeLinks)}
+                                    {blockItems(aboutUsLink)}
                                 </ul>
                             </div>
                         </div>
@@ -124,7 +121,7 @@ class Footer extends React.Component {
                                     <li className="footer__social-item">
                                         <div className="footer__social-icon footer__facebook-icon"></div>
                                         <div>
-                                            <a className="footer__link footer__social-link" href="//facebook.com/nicistore" target="_blank">
+                                            <a className="footer__link footer__social-link" href="https://www.facebook.com/dicci.jewelry/" target="_blank">
                                                 <Text size="small">Facebook</Text>
                                             </a>
                                         </div>
@@ -132,7 +129,7 @@ class Footer extends React.Component {
                                     <li className="footer__social-item">
                                         <div className="footer__social-icon footer__instagram-icon"></div>
                                         <div>
-                                            <a className="footer__link footer__social-link" href="//instagram.com/nicistore" target="_blank">
+                                            <a className="footer__link footer__social-link" href="https://www.instagram.com/dicci.jewelry/" target="_blank">
                                                 <Text size="small">Instagram</Text>
                                             </a>
                                         </div>
@@ -140,7 +137,7 @@ class Footer extends React.Component {
                                     <li className="footer__social-item">
                                         <div className="footer__social-icon footer__pinterest-icon"></div>
                                         <div>
-                                            <a className="footer__link footer__social-link" href="//pinterest.com/nicistore" target="_blank">
+                                            <a className="footer__link footer__social-link" href="//pinterest.com/dicci.jewelry/" target="_blank">
                                                 <Text size="small">Pinterest</Text>
                                             </a>
                                         </div>
@@ -148,7 +145,7 @@ class Footer extends React.Component {
                                     <li className="footer__social-item">
                                         <div className="footer__social-icon footer__twitter-icon"></div>
                                         <div>
-                                            <a className="footer__link footer__social-link" href="//twitter.com/nicistore" target="_blank">
+                                            <a className="footer__link footer__social-link" href="//twitter.com/dicci.jewelry/" target="_blank">
                                                 <Text size="small">Twitter</Text>
                                             </a>
                                         </div>
@@ -172,7 +169,7 @@ class Footer extends React.Component {
 
                     </div>
                     <div className="footer__copyright">
-                        <Text size="small">© {new Date().getFullYear()} NICI</Text>
+                        <Text size="small">© {new Date().getFullYear()} DICCI, Powered by <a href="https://www.mosano.eu">MOSANO©</a></Text>
                     </div>
                 </div>
             </div>

@@ -82,7 +82,7 @@ class Application extends React.Component {
     //*** Template ***//
 
     render() {
-        
+
         let intlStore = this.context.getStore(IntlStore);
 
         // Main navigation menu items

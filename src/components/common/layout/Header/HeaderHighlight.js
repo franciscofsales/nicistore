@@ -36,17 +36,9 @@ class HeaderHighlight extends React.Component {
         let intlStore = this.context.getStore(IntlStore);
         return (
             <div className="header-highlight">
-                <div className="header-highlight__shipping-icon">
-                    <i className="fa fa-truck" aria-hidden="true" />
-                </div>
                 <div className="header-highlight__shipping-text">
                     <Text size="small" weight="bold">
-                        <FormattedMessage message={intlStore.getMessage(intlData, 'freeShipping')}
-                                          locales={intlStore.getCurrentLocale()} />
-                        &nbsp;
-                        <FormattedNumber value="19.90"
-                                         style="currency"
-                                         currency="EUR" />
+                        <FormattedMessage message={'DICCI'}/>
                     </Text>
                 </div>
             </div>

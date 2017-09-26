@@ -2,7 +2,7 @@
 // Do not require this directly. Use ./src/config instead.
 export default {
     app: {
-        title: 'NICI Store',
+        title: 'DICCI Store',
         locale: {
             available: ['en', 'pt'],
             default: 'en'
