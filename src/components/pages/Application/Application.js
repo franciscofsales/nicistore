@@ -146,7 +146,7 @@ class Application extends React.Component {
                 <div className={contentClass}>
                     {isAdmin ?
                         <div className="application__admin-warning">
-                            <Heading>*** ADMIN ACCOUNT ***</Heading>
+                            <Heading>Admin</Heading>
                         </div>
                         :
                         null
