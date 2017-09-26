@@ -56,6 +56,16 @@ class ProductsAPI {
     }
 
     /**
+     * Search product
+     */
+    search(params) {
+        return new Promise((resolve, reject) => {
+            let request = superagent.get(`${this.baseUrl}/products/search`).query(params || {});
+            this._wrapAndRequest(request, resolve, reject);
+        });
+    }
+
+    /**
      * Fetch Product with given ID
      */
     get(productId) {

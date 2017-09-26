@@ -18,6 +18,7 @@ import Badge from '../../indicators/Badge';
 import CollectionTreeMenu from '../../navigation/CollectionTreeMenu';
 import MainNavigation from '../../navigation/MainNavigation';
 import Text from '../../typography/Text';
+import InputField from '../../forms/InputField';
 
 // Translation data for this component
 import intlData from './DesktopHeader.intl';
@@ -39,7 +40,8 @@ class DesktopHeader extends React.Component {
         cartTotalItems: this.context.getStore(CartStore).getTotalItems(),
         user: this.context.getStore(AccountStore).getAccountDetails(),
         openedDrawer: this.context.getStore(DrawerStore).getOpenedDrawer(),
-        collectionsTreeMenuEnabled: false
+        collectionsTreeMenuEnabled: false,
+        search: ''
     };
 
     //*** Component Lifecycle ***//
@@ -64,6 +66,16 @@ class DesktopHeader extends React.Component {
         this.context.executeAction(triggerDrawer, drawer);
     };
 
+    handleFieldChange = (param, value) => {
+        this.setState({[param]: value});
+    };
+
+    handleSearchTrigger = () => {
+        this.context.router.transitionTo('product-search', {
+            locale: this.context.getStore(IntlStore).getCurrentLocale()
+        }, {term: this.state.search});
+    }
+
     //*** Template ***//
 
     render() {
@@ -83,6 +95,17 @@ class DesktopHeader extends React.Component {
                             </Link>
                             <div className="desktop-header__navigation">
                                 <MainNavigation links={this.props.collections} />
+                            </div>
+                            <div className="desktop-header__navigation">
+                                <div className="desktop-header__search">
+                                  <div className="desktop-header__search-field">
+                                      <InputField
+                                        onChange={this.handleFieldChange.bind(null, 'search')}
+                                        onEnterPress={this.handleSearchTrigger}
+                                        value={this.state.search}
+                                      />
+                                  </div>
+                                </div>
                             </div>
                         </div>
                         <div className="desktop-header__container-right-column">
