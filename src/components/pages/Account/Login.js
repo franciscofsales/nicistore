@@ -5,6 +5,8 @@ import React from 'react';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import {FormattedMessage} from 'react-intl';
 import {Link} from 'react-router';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 // Flux
 import AccountStore from '../../../stores/Account/AccountStore';
@@ -165,7 +167,7 @@ class Login extends React.Component {
     handleSubmitClick = () => {
 
         let intlStore = this.context.getStore(IntlStore);
-        
+
         this.setState({errorMessage: null});
         this.setState({fieldErrors: {}});
         let fieldErrors = {};
@@ -185,6 +187,13 @@ class Login extends React.Component {
             });
         }
     };
+
+    handleSocialClick = (res, provider) => {
+      const token = response.token || response.accessToken;
+  		if (!token) {
+  			return;
+  		}
+    }
 
     handleMergeCartsModalNoClick = () => {
         let userCarts = this.context.getStore(AccountStore).getAccountDetails().carts;
@@ -296,6 +305,18 @@ class Login extends React.Component {
                                 <Text>Esqueceu-se da password?</Text>
                             </Link>
                         </div>
+                        <FacebookLogin
+                          appId="1088597931155576"
+                          autoLoad={true}
+                          fields="name,email,picture"
+                          callback={res => this.handleSocialClick(res, 'facebook')}
+                        />
+                        <GoogleLogin
+                          clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                          buttonText="Login with google"
+                          onSuccess={res => this.handleSocialClick(res, 'google')}
+                          onFailure={err => console.log(err)}
+                        />
                     </div>
                 </div>
             </div>
