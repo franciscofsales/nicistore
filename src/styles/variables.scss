@@ -1,7 +1,7 @@
 @import './mixins/breakpoints';
 
 $font-family-heading: 'Montserrat', sans-serif;
-$font-family-body: 'Open Sans', sans-serif;
+$font-family-body: OpenSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-size-small: 13px;
 $font-size-medium: 16px;
 $font-size-large: 24px;
@@ -11,10 +11,10 @@ $font-size-heading-large: 30px;
 $font-weight-normal: normal;
 $font-weight-bold: 700;
 
-$dicci-color-heading: #000000;
+$dicci-color-heading: #1a1818;
 $dicci-color-secondary: #ccc;
 $color-heading: #5c433d;
-$color-body: rgb(85, 85, 85);
+$color-body: #1a1818;
 $color-primary: #000000;
 $color-primary-hover: #555555;
 $color-secondary: #f4efe1;

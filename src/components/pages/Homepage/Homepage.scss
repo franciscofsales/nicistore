@@ -5,7 +5,38 @@
  * Featured Collections
  */
 
+.wrap-container{
+  padding: 0 10%;
+}
+
+.homepage-section {
+  padding-top: 1%;
+  width: 100%;
+  text-align: center;
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color:black;
+    line-height: 1.4;
+  }
+}
+.homepage-landing-image{
+  background-image:url('../../../../static/diccislide4.jpg');
+  -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+
+  /* Full height */
+  height: 60%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color:#1a1818;
+}
+
 .homepage__cta {
+    width: 100%;
     display: flex;
     @include breakpoint(handhelds) {
         flex-direction: column;
@@ -15,7 +46,7 @@
 .homepage__featured {
     flex-wrap: wrap;
     align-self: center;
-    width: 20%;
+    width: 100%;
     min-width: 250px;
     @include breakpoint(handhelds) {
         display: flex;
@@ -26,8 +57,12 @@
 }
 
 .homepage__featured-block {
+    border-top: 1px solid;
+    border-top-color: #cabebe;
+    opacity: 0.9;
     display: flex;
     margin-top: 20px;
+    justify-content: center;
 }
 
 .homepage__banners {

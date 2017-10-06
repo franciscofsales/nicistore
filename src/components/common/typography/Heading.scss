@@ -2,7 +2,7 @@
 
 .heading {
     font-family: $font-family-heading;
-    color: $color-heading;
+    color: $color-body;
 
     // Size
 
@@ -19,7 +19,7 @@
     }
 
     &-dicci {
-      color: black;
+      color: white;
       font-size: 18px;
       font-weight: 400;
     }

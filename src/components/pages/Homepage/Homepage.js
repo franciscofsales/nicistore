@@ -145,55 +145,35 @@ class Homepage extends React.Component {
         //
         return (
             <div className="homepage">
-                <div className="homepage__cta">
-                    <div className="homepage__featured">
-                        <div className="homepage__featured-block">
-                            <HomepageFeaturedCollection feature={featuredCollections[0]} />
-                            <HomepageFeaturedCollection feature={featuredCollections[1]} />
-                        </div>
-                        <div className="homepage__featured-block">
-                            <HomepageFeaturedCollection feature={featuredCollections[2]} />
-                            <HomepageFeaturedCollection feature={featuredCollections[3]} />
-                        </div>
-                    </div>
-
-                    <div className="homepage__banners">
-                        <Carousel images={this.state.banners.filter(function (banner) {
-                            return banner.body && banner.body.image;
-                        }).map(function (banner) {
-                            return {
-                                src: `//${banner.body.image.url}`,
-                                link: banner.body.link
-                            };
-                        })} />
-                    </div>
+                <div className="homepage-landing-image"></div>
+                <div className="homepage-section">
+                    <Carousel images={this.state.banners.filter(function (banner) {
+                        return banner.body && banner.body.image;
+                    }).map(function (banner) {
+                        return {
+                            src: `//${banner.body.image.url}`,
+                            link: banner.body.link
+                        };
+                    })} />
                 </div>
-
-                {this.state.articles.length > 0 ?
-                    <div className="homepage__articles">
-                        {this.state.articles.map((content, idx) => {
-                            let articleRouteParams = Object.assign({
-                                contentId: content.id,
-                                contentSlug: slugify(intlStore.getMessage(content.name))
-                            }, routeParams);
-                            return (
-                                <div key={idx} className="homepage__article-item">
-                                    <Link className="homepage__article-link" to="article-slug"
-                                          params={articleRouteParams}>
-                                        <ArticleSummary key={idx} size="small" content={content} hideLink={true} />
-                                    </Link>
-                                </div>
-                            );
-                        })}
+                <div className="wrap-container">
+                  <div className="homepage-section">
+                    <h2>Collections</h2>
+                  </div>
+                  <div className="homepage__cta">
+                    <div className="homepage__featured">
+                      <div className="homepage__featured-block">
+                        <HomepageFeaturedCollection feature={featuredCollections[0]}/>
+                        <HomepageFeaturedCollection feature={featuredCollections[1]}/>
+                        <HomepageFeaturedCollection feature={featuredCollections[2]}/>
+                      </div>
+                      <div className="homepage__featured-block">
+                        <HomepageFeaturedCollection feature={featuredCollections[3]}/>
+                        <HomepageFeaturedCollection feature={featuredCollections[1]}/>
+                        <HomepageFeaturedCollection feature={featuredCollections[2]}/>
+                      </div>
                     </div>
-                    :
-                    null
-                }
-
-                <div className="homepage__products">
-                    <ProductList title={featuredProductsTitle()}
-                                 filters={productFilters()}
-                                 products={this.state.featuredProducts} />
+                  </div>
                 </div>
             </div>
         );

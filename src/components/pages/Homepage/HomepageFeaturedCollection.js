@@ -38,8 +38,15 @@ class HomepageFeaturedCollection extends React.Component {
             return (
                 <div className="homepage-featured-collection">
                     <Link to={this.props.feature.link.to} params={this.props.feature.link.params}>
-                        <img className="homepage-featured-collection__image" src={this.props.feature.img.src} alt={this.props.feature.img.alt} />
+                        <img className="homepage-featured-collection__image" src={this.props.feature.img.src} alt={this.props.feature.img.alt}/>
                     </Link>
+                    <div className="homepage-featured-collection__bottom">
+                      <div className="box">
+                        <div className="collection-title">
+                        {intlStore.getMessage(this.props.feature.name)}
+                        </div>
+                      </div>
+                    </div>
                 </div>
             );
         } else if (this.props.feature) {

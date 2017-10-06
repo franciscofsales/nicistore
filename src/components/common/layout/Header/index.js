@@ -8,7 +8,7 @@ import Breakpoint from '../../../core/Breakpoint';
 
 import DesktopHeader from './DesktopHeader';
 import HandheldsHeader from './HandheldsHeader';
-import HeaderHighlight from './HeaderHighlight';
+
 
 /**
  * Module's default component
@@ -20,7 +20,6 @@ class Header extends React.Component {
     render() {
         return (
             <div className="header">
-                <HeaderHighlight />
                 <Breakpoint point="handhelds">
                     <HandheldsHeader {...this.props}></HandheldsHeader>
                 </Breakpoint>

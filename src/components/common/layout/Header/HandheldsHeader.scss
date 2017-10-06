@@ -1,7 +1,9 @@
 .handhelds-header {
     display: flex;
     padding: 15px;
+    background-color: #1a1818;
     border-bottom: solid 1px #eeeeee;
+    .text{ color : white;}
 }
 
 /*
@@ -27,9 +29,9 @@
 
 .handhelds-header__logo {
     width: 100%;
-    min-width: 30px;
-    max-width: 30px;
-    height: 30px;
+    min-width: 70px;
+    max-width: 70px;
+    height: 70px;
     background: url('../../../../../static/diccilogo.png') no-repeat;
     background-size: 100%;
 }
@@ -51,7 +53,7 @@
 
 .handhelds-header__menu-button {
     width: 30px;
-    height: 30px;
+    height: 29px;
     cursor: pointer;
     background: url('./menu.png');
     background-size: 100%;

@@ -1,10 +1,14 @@
 @import '../../../../styles/variables.scss';
-
+//#1a1818
 .desktop-header {
-    display: flex;
-    justify-content: center;
-    border-top: solid 1px $color-primary;
-    border-bottom: solid 1px #eeeeee;
+  .text{
+    color:white;
+  }
+  background-color: #1a1818;
+  display: flex;
+  justify-content: center;
+  border-top: solid 1px white;
+  //border-bottom: solid 1px #eeeeee;
 }
 
 /*
@@ -50,12 +54,13 @@
 
 .desktop-header__logo {
     width: 100%;
-    min-width: 47px;
-    max-width: 47px;
-    height: 47px;
-    background: url('../../../../../static/diccilogo.png');
+    min-width: 87px;
+    max-width: 87px;
+    height: 37px;
+    background: url('../../../../../static/diccilogo.png') no-repeat;
     background-size: 100%;
     align-self: center;
+
 }
 
 .desktop-header__logo-link {
@@ -87,6 +92,7 @@
 
 .desktop-header__logout-button,
 .desktop-header__register-button {
+
     align-self: center;
     padding: 10px;
 
@@ -95,7 +101,7 @@
 
         &:hover {
             span {
-                color: $color-primary;
+                color: grey;
             }
         }
     }
@@ -113,7 +119,7 @@
 
         &:hover {
             span {
-                color: $color-primary;
+                color: grey;
             }
         }
     }

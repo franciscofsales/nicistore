@@ -44,9 +44,9 @@ class ImageLibrary extends React.Component {
         images.splice(idx, 1);
         this.props.onChange(images);
     };
-    
+
     //*** Template ***//
-    
+
     render() {
         let intlStore = this.context.getStore(IntlStore);
         return (
