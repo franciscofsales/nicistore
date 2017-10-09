@@ -15,10 +15,23 @@
   //border-bottom: solid 1px #eeeeee;
 }
 
-.desktop-header-jump {
-  animation: stuckMoveDown .6s;
-  -webkit-animation: stuckMoveDown .6s;
+.desktop-header-background {
   background-color: #1a1818;
+  top: -65px;
+  position: fixed;
+  width: 100%;
+  height: 63px;
+  opacity: 0;
+  -webkit-transition: all .1s ease-out;
+  -moz-transition: all .1s ease-out;
+  -o-transition: all .1s ease-out;
+  transition: all .1s ease-out;
+  background-color: #1a1818;
+}
+
+.desktop-header-bg-visible {
+  top: 0px;
+  opacity: 0.8;
 }
 
 /*
@@ -67,6 +80,7 @@
     width: 100%;
     min-width: 87px;
     max-width: 87px;
+    z-index: 5;
     height: 30px;
     background: url('../../../../../static/diccilogo.png') no-repeat;
     background-size: contain;
@@ -77,6 +91,7 @@
 
 .desktop-header__logo-link {
     align-self: center;
+    z-index: 5;
 }
 
 .desktop-header__button {
@@ -141,6 +156,7 @@
 }
 
 .desktop-header__cart {
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;

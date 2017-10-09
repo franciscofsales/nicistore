@@ -49,6 +49,7 @@ class DesktopHeader extends React.Component {
 
         // Component styles
         require('./DesktopHeader.scss');
+        console.log(this._header);
         window.addEventListener('scroll', this._calcScroll);
     }
 
@@ -70,22 +71,20 @@ class DesktopHeader extends React.Component {
         this.context.executeAction(triggerDrawer, drawer);
     };
 
-    _calcScroll = () => {
+    _calcScroll = header => {
       const _window = window;
-      const header = this.refs.header;
-      console.log(header.offsetHeight);
-      const heightDiff = parseInt(header.offsetHeight);
+
+      const heightDiff = 200;
       const scrollPos = _window.scrollY;
-      console.log(scrollPos, heightDiff);
-      // if (scrollPos > heightDiff) {
-      //     this.setState({
-      //       hasScrolledHeader: true
-      //     });
-      // } else {
-      //     this.setState({
-      //       hasScrolledHeader: false
-      //     });
-      // }
+      if (scrollPos > heightDiff) {
+          this.setState({
+            hasScrolledHeader: true
+          });
+      } else {
+          this.setState({
+            hasScrolledHeader: false
+          });
+      }
     }
 
     //*** Template ***//
@@ -98,7 +97,8 @@ class DesktopHeader extends React.Component {
 
         // Return
         return (
-            <div ref="header" className={`desktop-header${this.state.hasScrolledHeader ? ' desktop-header-jump':''}`}>
+            <div className="desktop-header">
+                <div className={`desktop-header-background${this.state.hasScrolledHeader ? ' desktop-header-bg-visible' : ''}`}/>
                 <div className="desktop-header__container">
                     <div className="desktop-header__row">
                         <div className="desktop-header__container-left-column">
