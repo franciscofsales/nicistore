@@ -157,8 +157,8 @@ class Homepage extends React.Component {
                     })} />
                 </div>
                 <div className="wrap-container">
-                  <div className="homepage-section">
-                    <h2>Collections </h2>
+                  <div className="homepage-section homepage-section-padding">
+                    Collections
                   </div>
                   <div className="homepage__cta">
                     <div className="homepage__featured">

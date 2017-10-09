@@ -9,17 +9,23 @@
   padding: 0 10%;
 }
 
+.homepage-section-padding {
+  padding-top: 2%;
+}
+
 .homepage-section {
   // padding-top: 1%;
   width: 100%;
   text-align: center;
-  h2 {
-    letter-spacing: 1px;
-    font-size: 1.8rem;
-    font-weight: 400;
-    color:black;
-    line-height: 1.4;
-  }
+
+  font-family: $font-family-titles;
+  letter-spacing: 1.28px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: black;
+  line-height: 1.4;
+  text-transform: uppercase;
+
 }
 .homepage-landing-image{
   background-image:url('../../../../static/dicci-header3.jpg');
@@ -58,8 +64,8 @@
 }
 
 .homepage__featured-block {
-    border-top: 1px solid;
-    border-top-color: #cabebe;
+    // border-top: 1px solid;
+    // border-top-color: #cabebe;
     opacity: 0.9;
     display: flex;
     margin-top: 20px;
