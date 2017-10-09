@@ -1,6 +1,6 @@
 .handhelds-header {
     display: flex;
-    padding: 15px;
+    padding: 10px 25px;
     background-color: #1a1818;
     border-bottom: solid 1px #eeeeee;
     .text{ color : white;}
@@ -22,17 +22,26 @@
 
 .handhelds-header__title {
     display: flex;
+    align-items: center;
     justify-content: center;
     align-self: center;
     width: 60%;
 }
 
+.handhelds-header__logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .handhelds-header__logo {
+
     width: 100%;
     min-width: 70px;
     max-width: 70px;
-    height: 70px;
+    height: 60px;
     background: url('../../../../../static/diccilogo.png') no-repeat;
+    background-position: center;
     background-size: 100%;
 }
 
@@ -62,8 +71,13 @@
 .handhelds-header__cart-button {
     width: 30px;
     height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: white;
     cursor: pointer;
-    background: url('./cart.png');
+    // background: url('./cart.png');
     background-size: 100%;
 }
 

@@ -8,12 +8,13 @@
 .main-navigation__item {
     display: inline;
     margin-left: 20px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 200;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 
     & > a {
         color: white;
+        opacity: 0.8;
         text-decoration: none;
         &:hover {
             color: grey;

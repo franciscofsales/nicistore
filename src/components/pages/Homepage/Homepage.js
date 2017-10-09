@@ -158,21 +158,26 @@ class Homepage extends React.Component {
                 </div>
                 <div className="wrap-container">
                   <div className="homepage-section">
-                    <h2>Collections</h2>
+                    <h2>Collections </h2>
                   </div>
                   <div className="homepage__cta">
                     <div className="homepage__featured">
                       <div className="homepage__featured-block">
-                        <HomepageFeaturedCollection feature={featuredCollections[0]}/>
-                        <HomepageFeaturedCollection feature={featuredCollections[1]}/>
-                        <HomepageFeaturedCollection feature={featuredCollections[2]}/>
+                        <HomepageFeaturedCollection feature={featuredCollections[0]} />
+                        <HomepageFeaturedCollection feature={featuredCollections[1]} />
+                        <HomepageFeaturedCollection feature={featuredCollections[2]} />
                       </div>
                       <div className="homepage__featured-block">
-                        <HomepageFeaturedCollection feature={featuredCollections[3]}/>
-                        <HomepageFeaturedCollection feature={featuredCollections[1]}/>
-                        <HomepageFeaturedCollection feature={featuredCollections[2]}/>
+                        <HomepageFeaturedCollection feature={featuredCollections[3]} />
+                        <HomepageFeaturedCollection feature={featuredCollections[4]} />
+                        <HomepageFeaturedCollection feature={featuredCollections[5]} />
                       </div>
                     </div>
+                  </div>
+                  <div className="homepage__products">
+                      <ProductList title={featuredProductsTitle()}
+                                   filters={productFilters()}
+                                   products={this.state.featuredProducts} />
                   </div>
                 </div>
             </div>

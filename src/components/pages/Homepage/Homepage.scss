@@ -10,7 +10,7 @@
 }
 
 .homepage-section {
-  padding-top: 1%;
+  // padding-top: 1%;
   width: 100%;
   text-align: center;
   h2 {
@@ -22,12 +22,12 @@
   }
 }
 .homepage-landing-image{
-  background-image:url('../../../../static/diccislide4.jpg');
-  -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  background-image:url('../../../../static/dicci-header3.jpg');
+  // -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  // clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
 
   /* Full height */
-  height: 60%;
+  height: 70%;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;

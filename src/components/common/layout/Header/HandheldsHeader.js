@@ -70,14 +70,14 @@ class HandheldsHeader extends React.Component {
                     }
                 </div>
                 <div className="handhelds-header__title">
-                    <Link to='homepage' params={routeParams}>
+                    <Link className="handhelds-header__logo-container" to='homepage' params={routeParams}>
                         <div className="handhelds-header__logo"></div>
                     </Link>
                 </div>
                 <div className="handhelds-header__right-actions">
                     {this.state.openedDrawer !== 'cart' ?
                         <Badge value={this.state.cartTotalItems > 0 ? this.state.cartTotalItems : null}>
-                            <div className="handhelds-header__cart-button" onClick={this.handleBtnClick.bind(null, 'cart')}></div>
+                            <div className="handhelds-header__cart-button fa fa-shopping-bag" onClick={this.handleBtnClick.bind(null, 'cart')}></div>
                         </Badge>
                         :
                         <div className="handhelds-header__close-button" onClick={this.handleBtnClick.bind(null, 'cart')}></div>

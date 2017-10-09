@@ -39,7 +39,8 @@ class DesktopHeader extends React.Component {
         cartTotalItems: this.context.getStore(CartStore).getTotalItems(),
         user: this.context.getStore(AccountStore).getAccountDetails(),
         openedDrawer: this.context.getStore(DrawerStore).getOpenedDrawer(),
-        collectionsTreeMenuEnabled: false
+        collectionsTreeMenuEnabled: false,
+        hasScrolledHeader: false
     };
 
     //*** Component Lifecycle ***//
@@ -48,6 +49,11 @@ class DesktopHeader extends React.Component {
 
         // Component styles
         require('./DesktopHeader.scss');
+        window.addEventListener('scroll', this._calcScroll);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this._calcScroll);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -64,6 +70,24 @@ class DesktopHeader extends React.Component {
         this.context.executeAction(triggerDrawer, drawer);
     };
 
+    _calcScroll = () => {
+      const _window = window;
+      const header = this.refs.header;
+      console.log(header.offsetHeight);
+      const heightDiff = parseInt(header.offsetHeight);
+      const scrollPos = _window.scrollY;
+      console.log(scrollPos, heightDiff);
+      // if (scrollPos > heightDiff) {
+      //     this.setState({
+      //       hasScrolledHeader: true
+      //     });
+      // } else {
+      //     this.setState({
+      //       hasScrolledHeader: false
+      //     });
+      // }
+    }
+
     //*** Template ***//
 
     render() {
@@ -74,7 +98,7 @@ class DesktopHeader extends React.Component {
 
         // Return
         return (
-            <div className="desktop-header">
+            <div ref="header" className={`desktop-header${this.state.hasScrolledHeader ? ' desktop-header-jump':''}`}>
                 <div className="desktop-header__container">
                     <div className="desktop-header__row">
                         <div className="desktop-header__container-left-column">
@@ -138,7 +162,7 @@ class DesktopHeader extends React.Component {
                                     </div>
                                 </div>
                             }
-                            <div className="desktop-header__cart" onClick={this.handleBtnClick.bind(null, 'cart')}>
+                            <div className="desktop-header__cart fa fa-shopping-bag" onClick={this.handleBtnClick.bind(null, 'cart')}>
                                 <Badge value={this.state.cartTotalItems > 0 ? this.state.cartTotalItems : null} />
                             </div>
                         </div>
