@@ -9,6 +9,16 @@
     }
 }
 
+.product-list-item__image {
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+  &:hover {
+    transform:  scale(1.1);
+  }
+}
+
 .product-list-item__name {
     margin-top: 5px;
 }
