@@ -95,7 +95,8 @@ class DesktopHeader extends React.Component {
         // Helper variables
         let intlStore = this.context.getStore(IntlStore);
         let routeParams = {locale: this.context.getStore(IntlStore).getCurrentLocale()};
-
+        let isAdmin = this.context.getStore(AccountStore).isAuthorized(['admin']);
+        
         // Return
         return (
             <div className={`desktop-header${this.state.hasScrolledHeader ? ' desktop-header-bg-position' : ''}${this.state.hasAnimated ? ' desktop-header-bg-visible': ''}`}>
@@ -121,6 +122,16 @@ class DesktopHeader extends React.Component {
                                             </Text>
                                         </Link>
                                     </div>
+                                    {isAdmin && (
+                                      <div className="desktop-header__admin-button">
+                                        <Link to='adm' params={routeParams}>
+                                            <Text size="small">
+                                                <FormattedMessage
+                                                    message={intlStore.getMessage(intlData, 'admin')}
+                                                    locales={intlStore.getCurrentLocale()} />
+                                            </Text>
+                                        </Link>
+                                      </div>)}
                                     <div className="desktop-header__account-button">
                                         <Link to='account' params={routeParams}>
                                             <div>

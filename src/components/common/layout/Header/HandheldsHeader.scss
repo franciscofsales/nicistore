@@ -1,7 +1,8 @@
+@import '../../../../styles/variables.scss';
 .handhelds-header {
     display: flex;
     padding: 10px 25px;
-    background-color: #1a1818;
+    background-color: $color-body;
     border-bottom: solid 1px #eeeeee;
     .text{ color : white;}
 }

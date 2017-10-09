@@ -144,7 +144,7 @@ class Application extends React.Component {
                     <div className="application__overlay-content"></div>
                 </div>
                 <div className={contentClass}>
-                    {isAdmin ?
+                    {isAdmin && false ?
                         <div className="application__admin-warning">
                             <Heading>Admin</Heading>
                         </div>

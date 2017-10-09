@@ -16,8 +16,12 @@
         color: white;
         opacity: 0.95;
         text-decoration: none;
+        -webkit-transition: all .1s ease-out;
+        -moz-transition: all .1s ease-out;
+        -o-transition: all .1s ease-out;
+        transition: all .1s ease-out;
         &:hover {
-            color: grey;
+          border-bottom: 3px solid white;
         }
     }
 }

@@ -53,14 +53,8 @@ class HomepageFeaturedCollection extends React.Component {
         } else if (this.props.feature) {
             return (
                 <div className="homepage-featured-collection homepage-featured-collection__placeholder">
-                    <Link to={this.props.feature.link.to} params={this.props.feature.link.params}>
-                        <div>
-                            <Text size="large">
-                                <FormattedMessage
-                                    message={intlStore.getMessage(this.props.feature.name)}
-                                    locales={intlStore.getCurrentLocale()} />
-                            </Text>
-                        </div>
+                    <Link className="homepage-collection-title homepage-collection-title-dark" to={this.props.feature.link.to} params={this.props.feature.link.params}>
+                        {intlStore.getMessage(this.props.feature.name)}
                     </Link>
                 </div>
             );

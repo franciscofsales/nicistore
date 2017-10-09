@@ -4,13 +4,15 @@ export default {
         login: 'Login',
         logout: 'Logout',
         myAccount: 'My Account',
-        register: 'Register'
+        register: 'Register',
+        admin: 'Admin'
     },
     pt: {
         hi: 'Olá',
         login: 'Login',
         logout: 'Logout',
         myAccount: 'A Minha Conta',
-        register: 'Registar'
+        register: 'Registar',
+        admin: 'Admin'
     }
 };

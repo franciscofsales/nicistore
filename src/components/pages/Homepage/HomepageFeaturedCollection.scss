@@ -28,6 +28,10 @@
       letter-spacing: 1.1px;
       font-weight: 200;
       font-size: 16px;
+      -webkit-transition: all .25s ease-in-out;
+      -moz-transition: all .25s ease-in-out;
+      -o-transition: all .25s ease-in-out;
+      transition: all .25s ease-in-out;
       background-color: rgba(20, 20, 20, 0.3);
       cursor: pointer;
       &:hover {
@@ -50,6 +54,10 @@
       letter-spacing: 1.28px;
       // font-weight: bold;
       text-transform: uppercase;
+      -webkit-transition: all .25s ease-in-out;
+      -moz-transition: all .25s ease-in-out;
+      -o-transition: all .25s ease-in-out;
+      transition: all .25s ease-in-out;
       cursor: pointer;
       &:hover {
         background-color: rgba(255,255,255,0.45)
@@ -65,14 +73,41 @@
     & > a {
         display: flex;
         justify-content: center;
-        width: 100%;
+        width: 40%;
         text-decoration: none;
-        color: #1a1818;
-
+        color: white;
+        font-size: 20px;
+        z-index: 3;
+        padding: 7px 5px;
+        background-color: rgba(20, 20, 20, 0.3);
+        border-radius: 1px;
+        text-decoration: none;
+        font-family: $font-family-titles;
+        letter-spacing: 1.28px;
+        // font-weight: bold;
+        text-transform: uppercase;
         & > div {
             align-self: center;
         }
+        -webkit-transition: all .25s ease-in-out;
+        -moz-transition: all .25s ease-in-out;
+        -o-transition: all .25s ease-in-out;
+        transition: all .25s ease-in-out;
+        &:hover {
+          background-color: rgba(100, 100, 100, 0.6);
+        }
     }
+}
+
+.homepage-collection-title-dark {
+  -webkit-transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -o-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
+  &:hover {
+    color: rgba(20, 20, 20, 0.9);
+    background-color: rgba(100, 100, 100, 0.6);
+  }
 }
 
 .homepage-feature-collection__image-conatiner {
@@ -87,7 +122,10 @@
   width:100%;
   height: 100%;
   object-fit: cover;
-
+  -webkit-transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -o-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
   @include breakpoint(medium-screens) {
       //border-radius: 50%;
       &:hover {
@@ -109,7 +147,7 @@
   padding-left: 3%;
   align-self: center;
   .box {
-    color: #1a1818;
+    color: $color-body;
     border-top: 3px solid;
     padding-bottom: 1%;
   }

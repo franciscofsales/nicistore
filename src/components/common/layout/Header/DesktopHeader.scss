@@ -4,7 +4,6 @@
   .text{
     color:white;
   }
-  // background-color: #1a1818;
   background-color: transparent;
   position: absolute;
   top: 0;
@@ -13,7 +12,6 @@
   display: flex;
   justify-content: center;
   border-top: solid 1px white;
-  //border-bottom: solid 1px #eeeeee;
   -webkit-transition: all .25s ease-out;
   -moz-transition: all .25s ease-out;
   -o-transition: all .25s ease-out;
@@ -27,7 +25,7 @@
 .desktop-header-bg-visible {
   position: fixed;
   top: 0;
-  background-color: #1a1818;
+  background-color: $color-body;
   opacity: 0.8;
 }
 
@@ -114,6 +112,7 @@
     align-self: center;
 }
 
+.desktop-header__admin-button,
 .desktop-header__logout-button,
 .desktop-header__register-button {
 
@@ -123,33 +122,44 @@
     a {
         text-decoration: none;
         opacity: 0.95;
+        span {
+          -webkit-transition: all .1s ease-out;
+          -moz-transition: all .1s ease-out;
+          -o-transition: all .1s ease-out;
+          transition: all .1s ease-out;
+        }
         &:hover {
             span {
-                color: grey;
+                border-bottom: 3px solid white;
             }
         }
     }
 }
 
+
 .desktop-header__login-button,
 .desktop-header__account-button {
-    padding: 5px 25px;
-    margin-left: 10px;
-    border: 1px solid #eee;
-    border-radius: 3px;
-    opacity: 0.95;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    a {
-        text-decoration: none;
+  padding: 5px 25px;
+  margin-left: 10px;
+  border: 1px solid rgba(255,255,255,0.88);
+  border-radius: 3px;
+  opacity: 0.95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-transition: all .1s ease-out;
+  -moz-transition: all .1s ease-out;
+  -o-transition: all .1s ease-out;
+  transition: all .1s ease-out;
 
-        &:hover {
-            span {
-                color: grey;
-            }
-        }
-    }
+  &:hover {
+    background-color: rgba(200, 200, 200, 0.38);
+  }
+  a {
+      text-decoration: none;
+  }
 }
 
 .desktop-header__cart {
@@ -165,4 +175,13 @@
   cursor: pointer;
   color: white;
   background-size: 100%;
+
+  -webkit-transition: all .1s ease-out;
+  -moz-transition: all .1s ease-out;
+  -o-transition: all .1s ease-out;
+  transition: all .1s ease-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }

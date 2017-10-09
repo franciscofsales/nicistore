@@ -41,6 +41,7 @@ class Heading extends React.Component {
         // Return element with tag according to size
         //
         let el = (children) => {
+          return children;
             if (this.props.size === 'large') {
                 return <h1>{children}</h1>;
             } else if (this.props.size === 'small') {
@@ -55,7 +56,7 @@ class Heading extends React.Component {
         //
         return (
             <div className={headingClass}>
-                {el(this.props.children)}
+                {this.props.children}
             </div>
         );
     }
