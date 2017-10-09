@@ -40,6 +40,19 @@
   background-size: cover;
   background-attachment: fixed;
   background-color: $color-body;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepage-landing-logo {
+    // background-image:url('../../../../static/logo-big.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 200px;
+    height: 200px;
+
 }
 
 .homepage__cta {
@@ -70,6 +83,8 @@
     display: flex;
     margin-top: 20px;
     justify-content: center;
+    flex-wrap: wrap;
+
 }
 
 .homepage__banners {
