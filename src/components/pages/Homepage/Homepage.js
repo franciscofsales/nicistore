@@ -147,7 +147,7 @@ class Homepage extends React.Component {
             <div className="homepage">
                 <div className="homepage-landing-image">
                   <div className="homepage-landing-logo">
-                    DICCI
+                    
                   </div>
                 </div>
                 <div className="homepage-section">

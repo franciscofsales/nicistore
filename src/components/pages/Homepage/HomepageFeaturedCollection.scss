@@ -45,7 +45,8 @@
       background-color: rgba(20, 20, 20, 0.3);
       cursor: pointer;
       &:hover {
-        background-color: rgba(255,255,255,0.45)
+        background-color: rgba(255,255,255,0.85);
+        color: opacify($color-body, 0.88);
       }
 
     }
@@ -70,7 +71,8 @@
       transition: all .25s ease-in-out;
       cursor: pointer;
       &:hover {
-        background-color: rgba(255,255,255,0.45)
+        background-color: rgba(255,255,255,0.85);
+        color: opacify($color-body, 0.88);
       }
     }
 

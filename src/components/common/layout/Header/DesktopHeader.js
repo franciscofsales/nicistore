@@ -192,24 +192,13 @@ class DesktopHeader extends React.Component {
 								</div>
 							) : (
 								<div className="desktop-header__account">
-									<div className="desktop-header__register-button">
-										<Link to="register" params={routeParams}>
-											<Text size="medium">
-												<FormattedMessage
-													message={intlStore.getMessage(intlData, 'register')}
-													locales={intlStore.getCurrentLocale()}
-												/>
-											</Text>
-										</Link>
-									</div>
+
+									<Link className="desktop-header__register-button" to="register" params={routeParams}>
+										{intlStore.getMessage(intlData, 'register')}
+									</Link>
 
 									<Link className="desktop-header__login-button" to="login" params={routeParams}>
-										<Text size="medium">
-											<FormattedMessage
-												message={intlStore.getMessage(intlData, 'login')}
-												locales={intlStore.getCurrentLocale()}
-											/>
-										</Text>
+										{intlStore.getMessage(intlData, 'login')}
 									</Link>
 
 								</div>
