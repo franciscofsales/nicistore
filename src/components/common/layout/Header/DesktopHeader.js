@@ -40,7 +40,8 @@ class DesktopHeader extends React.Component {
         user: this.context.getStore(AccountStore).getAccountDetails(),
         openedDrawer: this.context.getStore(DrawerStore).getOpenedDrawer(),
         collectionsTreeMenuEnabled: false,
-        hasScrolledHeader: false
+        hasScrolledHeader: false,
+        hasAnimated: false
     };
 
     //*** Component Lifecycle ***//
@@ -49,7 +50,6 @@ class DesktopHeader extends React.Component {
 
         // Component styles
         require('./DesktopHeader.scss');
-        console.log(this._header);
         window.addEventListener('scroll', this._calcScroll);
     }
 
@@ -74,15 +74,16 @@ class DesktopHeader extends React.Component {
     _calcScroll = header => {
       const _window = window;
 
-      const heightDiff = 200;
+      const heightDiff = 100;
       const scrollPos = _window.scrollY;
       if (scrollPos > heightDiff) {
           this.setState({
             hasScrolledHeader: true
-          });
+          },()=>setTimeout(()=> {this.setState({hasAnimated: true})}, 150));
       } else {
           this.setState({
-            hasScrolledHeader: false
+            hasScrolledHeader: false,
+            hasAnimated: false
           });
       }
     }
@@ -97,8 +98,7 @@ class DesktopHeader extends React.Component {
 
         // Return
         return (
-            <div className="desktop-header">
-                <div className={`desktop-header-background${this.state.hasScrolledHeader ? ' desktop-header-bg-visible' : ''}`}/>
+            <div className={`desktop-header${this.state.hasScrolledHeader ? ' desktop-header-bg-position' : ''}${this.state.hasAnimated ? ' desktop-header-bg-visible': ''}`}>
                 <div className="desktop-header__container">
                     <div className="desktop-header__row">
                         <div className="desktop-header__container-left-column">
