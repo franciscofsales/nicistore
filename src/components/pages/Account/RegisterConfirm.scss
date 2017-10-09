@@ -2,6 +2,10 @@
 
 .register-confirm {
     padding: 30px;
+    margin-top: 70px;
+    @include breakpoint(handhelds) {
+        margin-top: 0;
+    }
 }
 
 .register-confirm__message {

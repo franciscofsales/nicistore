@@ -3,6 +3,10 @@
 
 .collection-products-page {
     margin-bottom: 10px;
+    margin-top: 70px;
+    @include breakpoint(handhelds) {
+        margin-top: 0;
+    }
 }
 
 /*

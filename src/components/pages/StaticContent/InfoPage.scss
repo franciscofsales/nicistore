@@ -3,6 +3,10 @@
 .info-page {
     padding-top: 20px;
     padding-bottom: 20px;
+    margin: 80px 15px 0 15px;
+    @include breakpoint(handhelds) {
+      margin: 0 15px 0 15px;
+    }
 }
 
 .info-page__content {

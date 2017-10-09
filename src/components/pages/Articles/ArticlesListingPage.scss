@@ -2,11 +2,9 @@
 @import '../../../styles/variables.scss';
 
 .articles-listing-page {
-    margin-top: 30px;
-    margin-bottom: 30px;
-
+    margin: 95px 15px 30px 15px;
     @include breakpoint(handhelds) {
-        margin-top: 0;
+        margin: 0 15px 30px 15px;
     }
 }
 

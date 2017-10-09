@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+.not-found-page {
+  padding: 10%;
+  margin: 80px 15px 0 15px;
+  font-size: 24px;
+  opacity: 0.85;
+  @include breakpoint(handhelds) {
+    margin: 0 15px 0 15px;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

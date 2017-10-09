@@ -80,6 +80,7 @@ const ApplicationStore = createStore({
         this.routeError = statusCode;
         this.emitChange();
     }
+
 });
 
 /**

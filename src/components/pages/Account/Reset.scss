@@ -2,12 +2,13 @@
 @import '../../../styles/variables.scss';
 
 .reset {
-    margin: 30px 0 40px 0;
+    margin: 95px 0 40px 0;
     display: flex;
     justify-content: center;
-
+    
     @include breakpoint(handhelds) {
         margin: 10px 0 30px 0;
+
     }
 }
 

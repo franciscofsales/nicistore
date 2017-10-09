@@ -139,6 +139,8 @@
 
 .desktop-header__login-button,
 .desktop-header__account-button {
+  display: flex;
+  flex-direction: column;
   padding: 5px 25px;
   margin-left: 10px;
   border: 1px solid rgba(255,255,255,0.88);
@@ -153,7 +155,7 @@
   -moz-transition: all .1s ease-out;
   -o-transition: all .1s ease-out;
   transition: all .1s ease-out;
-
+  text-decoration: none;
   &:hover {
     background-color: rgba(200, 200, 200, 0.38);
   }
@@ -161,6 +163,7 @@
       text-decoration: none;
   }
 }
+
 
 .desktop-header__cart {
   z-index: 5;
