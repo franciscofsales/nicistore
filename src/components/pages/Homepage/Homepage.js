@@ -146,7 +146,9 @@ class Homepage extends React.Component {
         return (
             <div className="homepage">
                 <div className="homepage-landing-image">
-                  <div className="homepage-landing-logo" />
+                  <div className="homepage-landing-logo">
+                    DICCI
+                  </div>
                 </div>
                 <div className="homepage-section">
                     <Carousel images={this.state.banners.filter(function (banner) {
