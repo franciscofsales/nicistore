@@ -80,11 +80,7 @@ class Footer extends React.Component {
 
                         <div className="footer__block">
                             <div className="footer__block-title">
-                                <Heading size="small">
-                                    <FormattedMessage
-                                        message={intlStore.getMessage(intlData, 'theCompanyTitle')}
-                                        locales={intlStore.getCurrentLocale()} />
-                                </Heading>
+                              {intlStore.getMessage(intlData, 'theCompanyTitle')}
                             </div>
                             <div className="footer__block-content">
                                 <ul>
@@ -95,11 +91,7 @@ class Footer extends React.Component {
 
                         <div className="footer__block">
                             <div className="footer__block-title">
-                                <Heading size="small">
-                                    <FormattedMessage
-                                        message={intlStore.getMessage(intlData, 'infoTitle')}
-                                        locales={intlStore.getCurrentLocale()} />
-                                </Heading>
+                                {intlStore.getMessage(intlData, 'infoTitle')}
                             </div>
                             <div className="footer__block-content">
                                 <ul>
@@ -110,11 +102,7 @@ class Footer extends React.Component {
 
                         <div className="footer__block">
                             <div className="footer__block-title">
-                                <Heading size="small">
-                                    <FormattedMessage
-                                        message={intlStore.getMessage(intlData, 'socialTitle')}
-                                        locales={intlStore.getCurrentLocale()} />
-                                </Heading>
+                                {intlStore.getMessage(intlData, 'socialTitle')}
                             </div>
                             <div className="footer__block-content">
                                 <ul>
@@ -156,11 +144,7 @@ class Footer extends React.Component {
 
                         <div className="footer__block">
                             <div className="footer__block-title">
-                                <Heading size="small">
-                                    <FormattedMessage
-                                        message={intlStore.getMessage(intlData, 'newsletterTitle')}
-                                        locales={intlStore.getCurrentLocale()} />
-                                </Heading>
+                                {intlStore.getMessage(intlData, 'newsletterTitle')}
                             </div>
                             <div className="footer__block-content">
                                 <NewsletterSubscription />
