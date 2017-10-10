@@ -37,11 +37,13 @@ import AdminCollectionsEdit from './components/pages/Admin/Collections/AdminColl
 import AdminContents from './components/pages/Admin/Contents/AdminContents';
 import AdminContentsEdit from './components/pages/Admin/Contents/AdminContentsEdit';
 import AdminCustomers from './components/pages/Admin/Customers/AdminCustomers';
+import AdminCustomersEdit from './components/pages/Admin/Customers/AdminCustomersEdit';
 import AdminDashboard from './components/pages/Admin/Dashboard/AdminDashboard';
 import AdminOrders from './components/pages/Admin/Orders/AdminOrders';
 import AdminOrdersEdit from './components/pages/Admin/Orders/AdminOrdersEdit';
 import AdminProducts from './components/pages/Admin/Products/AdminProducts';
 import AdminProductsEdit from './components/pages/Admin/Products/AdminProductsEdit';
+
 
 /**
  * Application's Routes
@@ -78,6 +80,7 @@ const routes = (
             <Route name="adm-contents" path="contents" handler={AdminContents} />
             <Route name="adm-content-edit" path="contents/:contentId/?" handler={AdminContentsEdit} />
             <Route name="adm-customers" path="customers" handler={AdminCustomers} />
+            <Route name="adm-customer-edit" path="customers/:customerId/?" handler={AdminCustomersEdit} />
             <Route name="adm-orders" path="orders" handler={AdminOrders} />
             <Route name="adm-order-edit" path="orders/:orderId/?" handler={AdminOrdersEdit} />
             <Route name="adm-products" path="products" handler={AdminProducts} />

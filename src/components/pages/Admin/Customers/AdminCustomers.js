@@ -4,6 +4,7 @@
 import React from 'react';
 import connectToStores from 'fluxible-addons-react/connectToStores';
 import moment from 'moment';
+import {Link} from 'react-router';
 import {FormattedMessage} from 'react-intl';
 
 // Flux
@@ -66,6 +67,8 @@ class AdminCustomers extends React.Component {
         //
 
         let intlStore = this.context.getStore(IntlStore);
+        let routeParams = {locale: this.context.getStore(IntlStore).getCurrentLocale()}; // Base route params
+
 
         let headings = [
             <FormattedMessage
@@ -100,7 +103,9 @@ class AdminCustomers extends React.Component {
             }
             return {
                 data: [
-                    <Text size="medium">{customer.name}</Text>,
+                    <Link to="adm-customer-edit" params={Object.assign({customerId: customer.id}, routeParams)}>
+                        <Text size="medium">{customer.name}</Text>
+                    </Link>,
                     <Text size="medium">{customer.email}</Text>,
                     <Text size="medium">{moment(customer.createdAt).format('YYYY/MM/DD HH:mm:ss')}</Text>,
                     <StatusIndicator status={status} />

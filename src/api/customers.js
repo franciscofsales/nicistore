@@ -44,6 +44,26 @@ class CustomersAPI {
             this._wrapAndRequest(request, resolve, reject);
         });
     }
+
+    /**
+     * Fetch Customer with given ID
+     */
+    get(customerId) {
+        return new Promise((resolve, reject) => {
+            let request = superagent.get(`${this.baseUrl}/users/${customerId}`);
+            this._wrapAndRequest(request, resolve, reject);
+        });
+    }
+
+    /**
+     * Patch customer
+     */
+    patch(customerId, payload) {
+        return new Promise((resolve, reject) => {
+            let request = superagent.patch(`${this.baseUrl}/users/${customerId}`).send(payload);
+            this._wrapAndRequest(request, resolve, reject);
+        });
+    }
 }
 
 /**
