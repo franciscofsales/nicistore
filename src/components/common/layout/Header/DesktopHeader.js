@@ -144,30 +144,39 @@ class DesktopHeader extends React.Component {
 						<div className="desktop-header__container-right-column">
 							{this.state.user ? (
 								<div className="desktop-header__account">
-									<div className="desktop-header__logout-button">
-										<Link to="logout" params={routeParams}>
+									<Link
+										className="desktop-header__logout-button"
+										to="logout"
+										params={routeParams}
+									>
+										<Text size="small">
+											<FormattedMessage
+												message={intlStore.getMessage(intlData, 'logout')}
+												locales={intlStore.getCurrentLocale()}
+											/>
+										</Text>
+									</Link>
+
+									{isAdmin && (
+										<Link
+											className="desktop-header__admin-button"
+											to="adm"
+											params={routeParams}
+										>
 											<Text size="small">
 												<FormattedMessage
-													message={intlStore.getMessage(intlData, 'logout')}
+													message={intlStore.getMessage(intlData, 'admin')}
 													locales={intlStore.getCurrentLocale()}
 												/>
 											</Text>
 										</Link>
-									</div>
-									{isAdmin && (
-										<div className="desktop-header__admin-button">
-											<Link to="adm" params={routeParams}>
-												<Text size="small">
-													<FormattedMessage
-														message={intlStore.getMessage(intlData, 'admin')}
-														locales={intlStore.getCurrentLocale()}
-													/>
-												</Text>
-											</Link>
-										</div>
 									)}
 
-									<Link className="desktop-header__account-button" to="account" params={routeParams}>
+									<Link
+										className="desktop-header__account-button"
+										to="account"
+										params={routeParams}
+									>
 										<div>
 											<Text size="small">
 												<FormattedMessage
@@ -179,28 +188,30 @@ class DesktopHeader extends React.Component {
 										<div>
 											<Text size="small" weight="bold">
 												<FormattedMessage
-													message={intlStore.getMessage(
-														intlData,
-														'myAccount'
-													)}
+													message={intlStore.getMessage(intlData, 'myAccount')}
 													locales={intlStore.getCurrentLocale()}
 												/>
 											</Text>
 										</div>
 									</Link>
-
 								</div>
 							) : (
 								<div className="desktop-header__account">
-
-									<Link className="desktop-header__register-button" to="register" params={routeParams}>
+									<Link
+										className="desktop-header__register-button"
+										to="register"
+										params={routeParams}
+									>
 										{intlStore.getMessage(intlData, 'register')}
 									</Link>
 
-									<Link className="desktop-header__login-button" to="login" params={routeParams}>
+									<Link
+										className="desktop-header__login-button"
+										to="login"
+										params={routeParams}
+									>
 										{intlStore.getMessage(intlData, 'login')}
 									</Link>
-
 								</div>
 							)}
 							<div

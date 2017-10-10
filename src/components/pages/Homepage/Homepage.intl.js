@@ -1,8 +1,10 @@
 export default {
     en: {
-        productsList: 'Featured Products'
+        productsList: 'Featured Products',
+        collectionList: 'Collections'
     },
     pt: {
-        productsList: 'Destaques'
+        productsList: 'Destaques',
+        collectionList: 'Coleções'
     }
 };

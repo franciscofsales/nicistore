@@ -48,7 +48,7 @@ class ProductList extends React.Component {
 
         return (
             <div className="product-list">
-                {this.props.filters ?
+                {this.props.filters && !this.props.hideCollections ?
                     <div className="product-list__sidebar">
                         {this.props.filters.map((item, idx) => {
                             let links = item.collections.map((col) => {

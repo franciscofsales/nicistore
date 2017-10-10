@@ -1,0 +1,44 @@
+@import '../../../styles/mixins/breakpoints.scss';
+@import '../../../styles/variables.scss';
+
+.collection-list__title {
+  width: 100%;
+  text-align: center;
+}
+
+.collection-list__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0, 0.3);
+    margin: 15px 5px 0 5px;
+}
+
+.collection-list__item {
+  flex:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  &:hover {
+    span {
+      background-color: rgba(255,255,255, 0.88);
+      color: $dicci-color-heading;
+    }
+  }
+  span {
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    letter-spacing: 1.08px;
+    font-family: $font-family-titles;
+    font-weight: 600;
+    color: white;
+    // border: 2px solid white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+  }
+}

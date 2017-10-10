@@ -115,7 +115,7 @@
 .desktop-header__admin-button,
 .desktop-header__logout-button,
 .desktop-header__register-button {
-
+    outline:none;
     align-self: center;
     padding: 10px;
     opacity: 0.95;
@@ -134,6 +134,7 @@
 
 .desktop-header__login-button,
 .desktop-header__account-button {
+  outline:none;
   display: flex;
   flex-direction: column;
   padding: 5px 25px;
@@ -154,8 +155,8 @@
   color: white;
   &:hover {
     background-color: rgba(255, 255, 255, 0.88);
-      color: opacify($color-body, 0.88);
-    }
+    color: opacify($color-body, 0.88);
+  }
 }
 
 

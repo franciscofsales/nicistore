@@ -22,6 +22,7 @@ import fetchHomepageProducts from '../../../actions/Products/fetchHomepageProduc
 import ArticleSummary from '../../common/articles/ArticleSummary';
 import Carousel from '../../common/images/Carousel';
 import ProductList from '../../common/products/ProductList';
+import CollectionsList from '../../common/collections/CollectionsList';
 
 import HomepageFeaturedCollection from './HomepageFeaturedCollection';
 
@@ -140,6 +141,13 @@ class Homepage extends React.Component {
                        locales={intlStore.getCurrentLocale()} />;
         };
 
+        // Homepage Collections Title Component
+        let homepageCollectionsTitle = () => {
+            return <FormattedMessage
+                       message={intlStore.getMessage(intlData, 'collectionList')}
+                       locales={intlStore.getCurrentLocale()} />;
+        };
+
         //
         // Return
         //
@@ -147,7 +155,7 @@ class Homepage extends React.Component {
             <div className="homepage">
                 <div className="homepage-landing-image">
                   <div className="homepage-landing-logo">
-                    
+
                   </div>
                 </div>
                 <div className="homepage-section">
@@ -163,6 +171,11 @@ class Homepage extends React.Component {
                 <div className="wrap-container">
                   <div className="homepage-section homepage-section-padding">
                     Collections
+                  </div>
+                  <div className="homepage__collections">
+                      <CollectionsList
+                          filters={productFilters()}
+                      />
                   </div>
                   <div className="homepage__cta">
                     <div className="homepage__featured">
@@ -181,7 +194,8 @@ class Homepage extends React.Component {
                   <div className="homepage__products">
                       <ProductList title={featuredProductsTitle()}
                                    filters={productFilters()}
-                                   products={this.state.featuredProducts} />
+                                   products={this.state.featuredProducts}
+                                   hideCollections/>
                   </div>
                 </div>
             </div>
