@@ -41,7 +41,9 @@ class DesktopHeader extends React.Component {
 		openedDrawer: this.context.getStore(DrawerStore).getOpenedDrawer(),
 		collectionsTreeMenuEnabled: false,
 		hasScrolledHeader: false,
-		hasAnimated: false
+		hasAnimated: false,
+		isSearch: false,
+		searchTerm: ''
 	};
 
 	//*** Component Lifecycle ***//
@@ -93,6 +95,18 @@ class DesktopHeader extends React.Component {
 		}
 	};
 
+	_keyPressInput = e => {
+		// if enter
+    if(e.keyCode === 13) {
+      if(this.state.searchTerm && this.state.searchTerm.length > 0){
+				this.context.router.transitionTo('product-search', {
+             locale: this.context.getStore(IntlStore).getCurrentLocale()
+         }, {term: this.state.searchTerm});
+				 this.setState({searchTerm: '', isSearch: false});
+			}
+    }
+   }
+
 	//*** Template ***//
 
 	render() {
@@ -142,7 +156,7 @@ class DesktopHeader extends React.Component {
 							</div>
 						</div>
 						<div className="desktop-header__container-right-column">
-							{this.state.user ? (
+							{!this.state.isSearch && (this.state.user ? (
 								<div className="desktop-header__account">
 									<Link
 										className="desktop-header__logout-button"
@@ -157,7 +171,7 @@ class DesktopHeader extends React.Component {
 										</Text>
 									</Link>
 
-									{isAdmin && (
+									{isAdmin && !this.state.isSearch && (
 										<Link
 											className="desktop-header__admin-button"
 											to="adm"
@@ -213,7 +227,24 @@ class DesktopHeader extends React.Component {
 										{intlStore.getMessage(intlData, 'login')}
 									</Link>
 								</div>
-							)}
+							))}
+							{this.state.isSearch && (<div className="desktop-header__search-box-container">
+								<input
+									autoFocus
+									className="desktop-header__search-box"
+									value={this.state.searchTerm}
+									onChange={ev=> {this.setState({searchTerm: ev.target.value})}}
+									onKeyDown={this._keyPressInput}
+								/>
+								<div
+									className="desktop-header__search fa fa-close"
+									onClick={() => this.setState({isSearch: !this.state.isSearch})}
+								/>
+							</div>)}
+							{!this.state.isSearch && (<div
+								className="desktop-header__search fa fa-search"
+								onClick={() => this.setState({isSearch: !this.state.isSearch})}
+							/>)}
 							<div
 								className="desktop-header__cart fa fa-shopping-bag"
 								onClick={this.handleBtnClick.bind(null, 'cart')}

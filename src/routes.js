@@ -12,6 +12,7 @@ import Homepage from './components/pages/Homepage/Homepage';
 import Checkout from './components/pages/Checkout/Checkout';
 import CollectionProductsPage from './components/pages/Collections/CollectionProductsPage';
 import ProductListingPage from './components/pages/Products/ProductListingPage';
+import ProductSearchPage from './components/pages/Products/ProductSearchPage';
 import ProductPage from './components/pages/Products/ProductPage';
 
 import Account from './components/pages/Account/Account';
@@ -64,6 +65,7 @@ const routes = (
         <Route name="collection" path="collections/:collectionId/?" handler={CollectionProductsPage} />
         <Route name="collection-slug" path="collections/:collectionId/:collectionSlug/?" handler={CollectionProductsPage} />
         <Route name="products" path="products/?" handler={ProductListingPage} />
+        <Route name="product-search" path="search/?" handler={ProductSearchPage} />
         <Route name="product" path="products/:productId/?" handler={ProductPage} />
         <Route name="product-slug" path="products/:productId/:productSlug/?" handler={ProductPage} />
         <Route name="checkout" handler={Checkout} />

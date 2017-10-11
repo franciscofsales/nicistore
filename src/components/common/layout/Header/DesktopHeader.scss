@@ -16,6 +16,7 @@
   -moz-transition: all .25s ease-out;
   -o-transition: all .25s ease-out;
   transition: all .25s ease-out;
+  min-height: 45px;
 }
 
 .desktop-header-bg-position {
@@ -126,6 +127,8 @@
     -moz-transition: all .1s ease-out;
     -o-transition: all .1s ease-out;
     transition: all .1s ease-out;
+    font-weight: 200;
+    letter-spacing: 2px;
     &:hover {
       border-bottom: 3px solid white;
     }
@@ -153,6 +156,8 @@
   transition: all .1s ease-out;
   text-decoration: none;
   color: white;
+  font-weight: 200;
+  letter-spacing: 2px;
   &:hover {
     background-color: rgba(255, 255, 255, 0.88);
     color: opacify($color-body, 0.88);
@@ -182,4 +187,45 @@
   &:hover {
     opacity: 0.8;
   }
+}
+.desktop-header__search {
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  align-self: center;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  background-size: 100%;
+
+  -webkit-transition: all .1s ease-out;
+  -moz-transition: all .1s ease-out;
+  -o-transition: all .1s ease-out;
+  transition: all .1s ease-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.desktop-header__search-box-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+}
+
+.desktop-header__search-box {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+  outline: none;
+  color: white;
+  font-weight: 200;
+  letter-spacing: 2px;
+  padding: 5px;
 }
