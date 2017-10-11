@@ -3,14 +3,24 @@
  */
 import React from 'react';
 
+// Flux
+import IntlStore from '../../../stores/Application/IntlStore';
+
 // Required components
 import Heading from '../../common/typography/Heading';
 import Carousel from '../../common/images/Carousel';
+
+// Translation data for this component
+import intlData from './AboutUs.intl';
 
 /**
  * Component
  */
 class AboutUs extends React.Component {
+
+    static contextTypes = {
+        getStore: React.PropTypes.func.isRequired
+    };
 
     //*** Page Title and Snippets ***//
 
@@ -31,6 +41,9 @@ class AboutUs extends React.Component {
     //*** Template ***//
 
     render() {
+
+      let intlStore = this.context.getStore(IntlStore);
+
         return (
           <div>
             <div className="wrapper">
@@ -53,10 +66,9 @@ class AboutUs extends React.Component {
               <div className="aboutus-block">
                 <div className="aboutus_content">
                   <div className="aboutus-blank-square">
-                    <h1>About DICCI</h1>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;Influential, innovative and progressive, DICCI is reinventing a wholly modern approach to fashion. Under the vision of creative director Moises Teixeira,
-                    the House has redefined luxury for the 21st century, further reinforcing its position as one of the world’s most desirable fashion houses. Eclectic, contemporary, romantic—DICCI products represent the pinnacle of Portuguese craftsmanship and are unsurpassed for their quality and attention to detail.
-                    DICCI is part of the Kering Group, a world leader in apparel and accessories that owns a portfolio of powerful luxury and sport and lifestyle brands.
+                    <h1>{intlStore.getMessage(intlData, 'about')} DICCI</h1>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                      {intlStore.getMessage(intlData, 'aboutus')}
                     </p>
                   </div>
                 </div>

@@ -55,6 +55,7 @@
 .desktop-header__row {
     display: flex;
     width: 100%;
+    justify-content: space-between;
 
     &:not(:first-child) {
         margin-top: 7.5px;
@@ -63,10 +64,11 @@
 
 .desktop-header__container-left-column {
     display: flex;
-    width: 100%;
+    flex: none;
 }
 
 .desktop-header__container-right-column {
+    flex: none;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -222,7 +224,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 45px;
+  height: 48px;
+  width: 400px;
 }
 
 .desktop-header__search-box {
@@ -234,4 +237,5 @@
   font-weight: 200;
   letter-spacing: 2px;
   padding: 5px;
+  width: 100%;
 }

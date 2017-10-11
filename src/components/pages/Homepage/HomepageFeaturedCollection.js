@@ -59,6 +59,7 @@ class HomepageFeaturedCollection extends React.Component {
                 </div>
             );
         } else {
+          return null;
             return (
                 <div className="homepage-featured-collection homepage-featured-collection__placeholder"></div>
             );

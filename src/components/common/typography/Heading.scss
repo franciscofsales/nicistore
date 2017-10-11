@@ -2,17 +2,17 @@
 
 .heading {
     font-family: $font-family-titles;
-    color: $color-body;
+    color: rgba($color-body, 0.82);
     letter-spacing: 1.28px;
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 200;
     text-transform: uppercase;
     span{
       font-family: $font-family-titles;
-      color: $color-body;
+      color: rgba($color-body, 0.82);
       letter-spacing: 1.28px;
       font-size: 1.4rem;
-      font-weight: 600;
+      font-weight: 200;
       text-transform: uppercase;
     }
 

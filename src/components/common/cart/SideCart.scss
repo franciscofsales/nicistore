@@ -1,10 +1,14 @@
 /*
  * Empty Cart
  */
+@import '../../../styles/variables.scss';
 
 .side-cart__empty-action {
     padding: 14px 20px 15px 20px;
     cursor: pointer;
+    span {
+      color: rgba($color-body, 0.88);
+    }
 }
 
 .side-cart__empty-message {
@@ -17,9 +21,10 @@
  */
 
 .side-cart__header {
-    margin-left: 20px;
+  text-align: center;
     padding: 15px 20px 15px 20px;
-    background-color: rgb(249, 249, 249);
+    // background-color:rgba(0,0,0,0.03);
+    z-index: 1;
 }
 
 .side-cart__products {

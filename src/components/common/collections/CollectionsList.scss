@@ -11,7 +11,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0,0,0, 0.3);
+    background-color: rgba(0,0,0, 0.57);
     margin: 15px 5px 0 5px;
 }
 
@@ -32,13 +32,13 @@
     -moz-transition: all .2s ease-out;
     -o-transition: all .2s ease-out;
     transition: all .2s ease-out;
-    letter-spacing: 1.08px;
+    letter-spacing: 1.12px;
     font-family: $font-family-titles;
-    font-weight: 600;
+    font-weight: 200;
     color: white;
     // border: 2px solid white;
     text-decoration: none;
     padding: 10px 20px;
-    margin: 0 10px;
+    margin: 0 0.52vw;
   }
 }
