@@ -64,9 +64,9 @@ class HandheldsHeader extends React.Component {
             <div className="handhelds-header">
                 <div className="handhelds-header__left-actions">
                     {this.state.openedDrawer !== 'menu' ?
-                        <div className="handhelds-header__menu-button" onClick={this.handleBtnClick.bind(null, 'menu')}></div>
+                        <div className="handhelds-header__menu-button fa fa-bars" onClick={this.handleBtnClick.bind(null, 'menu')}></div>
                         :
-                        <div className="handhelds-header__close-button" onClick={this.handleBtnClick.bind(null, 'menu')}></div>
+                        <div className="handhelds-header__close-button fa fa-close" onClick={this.handleBtnClick.bind(null, 'menu')}></div>
                     }
                 </div>
                 <div className="handhelds-header__title">
@@ -80,7 +80,7 @@ class HandheldsHeader extends React.Component {
                             <div className="handhelds-header__cart-button fa fa-shopping-bag" onClick={this.handleBtnClick.bind(null, 'cart')}></div>
                         </Badge>
                         :
-                        <div className="handhelds-header__close-button" onClick={this.handleBtnClick.bind(null, 'cart')}></div>
+                        <div className="handhelds-header__close-button fa fa-close" onClick={this.handleBtnClick.bind(null, 'cart')}></div>
                     }
                 </div>
             </div>

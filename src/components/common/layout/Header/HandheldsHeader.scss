@@ -65,7 +65,8 @@
     width: 30px;
     height: 29px;
     cursor: pointer;
-    background: url('./menu.png');
+    font-size: 30px;
+    color: white;
     background-size: 100%;
 }
 
@@ -78,7 +79,6 @@
     font-size: 30px;
     color: white;
     cursor: pointer;
-    // background: url('./cart.png');
     background-size: 100%;
 }
 
@@ -86,6 +86,7 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
-    background: url('./close.png');
+    font-size: 30px;
+    color: white;
     background-size: 100%;
 }
