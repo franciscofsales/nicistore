@@ -51,9 +51,9 @@ class Footer extends React.Component {
 
         // Info links
         let infoLinks = [
-            {name: 'Apoio ao Cliente', link: {to: 'info', params: routeParams}},
-            {name: 'Portes de Envio', link: {to: 'info', params: routeParams}},
-            {name: 'Termos e Condições', link: {to: 'info', params: routeParams}}
+            {name: intlStore.getMessage(intlData, 'clientSupport'), link: {to: 'info', params: routeParams}},
+            {name: intlStore.getMessage(intlData, 'Shipping'), link: {to: 'info', params: routeParams}},
+            {name: intlStore.getMessage(intlData, 'TC'), link: {to: 'info', params: routeParams}}
         ];
 
         // Return a content block's items
