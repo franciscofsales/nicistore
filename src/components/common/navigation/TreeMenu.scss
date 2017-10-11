@@ -49,7 +49,7 @@
     }
 
     &--selected {
-        background-color: $color-secondary;
+        background-color: rgba($color-primary, 0.23);
     }
 }
 

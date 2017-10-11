@@ -54,7 +54,7 @@ class AboutUs extends React.Component {
                 <div className="aboutus_content">
                   <div className="aboutus-blank-square">
                     <h1>About DICCI</h1>
-                    <p>Influential, innovative and progressive, DICCI is reinventing a wholly modern approach to fashion. Under the vision of creative director Moises Teixeira,
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;Influential, innovative and progressive, DICCI is reinventing a wholly modern approach to fashion. Under the vision of creative director Moises Teixeira,
                     the House has redefined luxury for the 21st century, further reinforcing its position as one of the world’s most desirable fashion houses. Eclectic, contemporary, romantic—DICCI products represent the pinnacle of Portuguese craftsmanship and are unsurpassed for their quality and attention to detail.
                     DICCI is part of the Kering Group, a world leader in apparel and accessories that owns a portfolio of powerful luxury and sport and lifestyle brands.
                     </p>
