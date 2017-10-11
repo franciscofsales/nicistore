@@ -76,8 +76,9 @@ class DesktopHeader extends React.Component {
 		const _window = window;
 
 		const heightDiff = 100;
-		const scrollPos = _window.scrollY;
-		if (scrollPos > heightDiff) {
+		const scrollPos = Math.max(_window.scrollY, 0);
+		if (scrollPos > heightDiff && !this._updatingBar) {
+			this._updatingBar = true;
 			this.setState(
 				{
 					hasScrolledHeader: true
@@ -85,13 +86,17 @@ class DesktopHeader extends React.Component {
 				() =>
 					setTimeout(() => {
 						this.setState({ hasAnimated: true });
-					}, 150)
+						this._updatingBar = false;
+					}, 75)
 			);
-		} else {
-			this.setState({
-				hasScrolledHeader: false,
-				hasAnimated: false
-			});
+		} else if (scrollPos <= heightDiff && !this._updatingBar) {
+			this._updatingBar = true;
+			setTimeout(()=>{
+				this.setState({
+					hasScrolledHeader: false,
+					hasAnimated: false
+				}, ()=>{this._updatingBar = false;});
+			}, 300);
 		}
 	};
 
@@ -134,11 +139,11 @@ class DesktopHeader extends React.Component {
 		// Return
 		return (
 			<div
-				className={`desktop-header${this.state.hasScrolledHeader ||
-				!isFullScreenRoute
-					? ' desktop-header-bg-position'
-					: ''}${this.state.hasAnimated || !isFullScreenRoute
-					? ' desktop-header-bg-visible'
+				className={
+					`desktop-header${
+						this.state.hasScrolledHeader || !isFullScreenRoute ? ' desktop-header-bg-position'
+					: ''}
+						${this.state.hasAnimated || !isFullScreenRoute ? ' desktop-header-bg-visible'
 					: ''}`}
 			>
 				<div className="desktop-header__container">
