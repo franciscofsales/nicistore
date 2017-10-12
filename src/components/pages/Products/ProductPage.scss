@@ -168,3 +168,60 @@
     justify-content: center;
     margin-top: 30px;
 }
+
+.product-page__social-share {
+  width: 100%;
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #eeeeee;
+}
+
+.product-page__social-row {
+  width: 100%;
+  margin-top: 10px;
+  flex-direction: row;
+  display: flex;
+}
+
+.product-page__share-button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 18px;
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+  margin-right: 10px;
+  &:hover {
+    opacity: 0.82;
+  }
+}
+
+.product-page__share-icon {
+  font-size: 15px;
+  color: white;
+}
+
+.product-page__facebook {
+  background-color: $facebook-color;
+}
+
+.product-page__twitter {
+  background-color: $twitter-color;
+}
+
+.product-page__google {
+  background-color: $google-color;
+}
+
+.product-page__pinterest {
+  background-color: $pinterest-color;
+}
+
+.product-page__email {
+  background-color: $color-primary;
+}

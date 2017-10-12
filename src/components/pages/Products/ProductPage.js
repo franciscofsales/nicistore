@@ -7,6 +7,8 @@ import connectToStores from 'fluxible-addons-react/connectToStores';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 
 import {slugify} from '../../../utils/strings';
+import {getPopupDimensions} from '../../../utils/window';
+
 
 // Flux
 import CartStore from '../../../stores/Cart/CartStore';
@@ -36,6 +38,7 @@ import Text from '../../common/typography/Text';
 
 // Translation data for this component
 import intlData from './ProductPage.intl';
+
 
 /**
  * Component
@@ -176,6 +179,14 @@ class ProductPage extends React.Component {
         this.setState({quantity: value});
     };
 
+    _openShareLink = url => {
+      const settings = 'scrollbars=no,toolbar=no,location=no,titlebar=no,directories=no,status=no,menubar=no';
+      const win = window.open(url, 'Dicci', `${settings},${getPopupDimensions(555, 650)}`);
+      if (win) {
+        win.focus();
+      }
+    }
+
     //*** Template ***//
 
     render() {
@@ -183,9 +194,39 @@ class ProductPage extends React.Component {
         //
         // Helper methods & variables
         //
+        //
 
         let intlStore = this.context.getStore(IntlStore);
         let routeParams = {locale: intlStore.getCurrentLocale()}; // Base route params
+
+        const shareButtons = [
+          {
+            id: 'facebook',
+            icon: 'facebook',
+            url: `https://facebook.com/sharer/sharer.php?u=${window.location.href}`
+          },
+          {
+            id: 'twitter',
+            icon: 'twitter',
+            url: `https://twitter.com/intent/tweet/?text=${intlStore.getMessage(this.state.product.name)};url=${window.location.href}`
+          },
+          {
+            id: 'google',
+            icon: 'google-plus',
+            url: `https://plus.google.com/share?url=${window.location.href}`
+          },
+          {
+            id: 'pinterest',
+            icon: 'pinterest-p',
+            url: `https://pinterest.com/pin/create/button/?url=${window.location.href}&media=${window.location.href}&description=${intlStore.getMessage(this.state.product.name)}`
+          },
+          {
+            id: 'email',
+            icon: 'envelope',
+            url: `mailto:?subject=${intlStore.getMessage(this.state.product.name)}&body=${window.location.href}`
+          }
+        ];
+
 
         // Breadcrumbs
         let breadcrumbs = [
@@ -341,6 +382,23 @@ class ProductPage extends React.Component {
                                     </div>
                                 </div>
 
+                                <div className="product-page__social-share">
+                                  <div className="product-page__social-label">
+                                      <Heading size="medium">
+                                          <FormattedMessage
+                                              message={intlStore.getMessage(intlData, 'socialShare')}
+                                              locales={intlStore.getCurrentLocale()} />
+                                      </Heading>
+                                  </div>
+                                  <div className="product-page__social-row">
+                                    {shareButtons.map(network => (
+                                      <div onClick={this._openShareLink.bind(null, network.url)} className={`product-page__share-button product-page__${network.id}`}>
+                                        <i className={`product-page__share-icon fa fa-${network.icon}`} />
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+
                                 {this.state.contents.map(function (content) {
                                     return (
                                         <div className="product-page__content">
@@ -349,7 +407,7 @@ class ProductPage extends React.Component {
                                     );
                                 })}
                             </div>
-                            
+
                             {!this.state.suggestionsLoading && this.state.suggestions.length === 0 ?
                                 <div className="product-page__suggestions product-page__suggestions--no-border"></div>
                                 :

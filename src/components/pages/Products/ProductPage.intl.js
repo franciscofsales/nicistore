@@ -5,7 +5,8 @@ export default {
         descriptionLabel: 'Description',
         homepage: 'Homepage',
         outOfStock: 'Out of Stock',
-        productsList: 'Products'
+        productsList: 'Products',
+        socialShare: 'Share'
     },
     pt: {
         addToCart: 'Comprar',
@@ -13,6 +14,7 @@ export default {
         descriptionLabel: 'Descrição',
         homepage: 'Página Principal',
         outOfStock: 'Esgotado',
-        productsList: 'Produtos'
+        productsList: 'Produtos',
+        socialShare: 'Partilha'
     }
 };
