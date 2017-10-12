@@ -1,5 +1,7 @@
 @import '../../../../styles/variables.scss';
-//#1a1818
+@import '../../../../styles/mixins/child.scss';
+@import '../../../../styles/mixins/filter.scss';
+
 .desktop-header {
   .text{
     color:white;
@@ -246,6 +248,9 @@
   opacity: 1;
   align-items: center;
   justify-content: center;
+  @include not-last-child('.desktop-header__lang-modal-item'){
+    border-bottom: 1px solid rgba($color-body, 0.12);
+  }
 }
 
 .desktop-header__lang-modal-item {
@@ -264,6 +269,7 @@
     background-color: rgba($color-body, 0.23);
     color: white;
   }
+
 }
 
 .desktop-header__lang-spinner{
@@ -280,5 +286,6 @@
   height: 25px;
   width: 35px;
   object-fit: contain;
-  opacity: 0.82;
+  opacity: 0.62;
+  @include filter(sepia, 25%);
 }
