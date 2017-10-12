@@ -257,10 +257,10 @@ class DesktopHeader extends React.Component {
                            			onCloseClick={this.state.isChangingLang ? null : this._handleLangModalClose}>
                            			{!this.state.isChangingLang ? (<div className="desktop-header__lang-modal-container">
                            				<div className="desktop-header__lang-modal-item" onClick={this._handleNewLang.bind(null, 'pt')}>
-                           					Português
+                           					<image src="../../../../static/pt.svg" className="desktop-header__lang-flag" />Português
                            				</div>
                            				<div className="desktop-header__lang-modal-item" onClick={this._handleNewLang.bind(null, 'en')}>
-                           					English
+                           					<image src="../../../../static/en.svg" className="desktop-header__lang-flag" />English
                            				</div>
                            			</div>) : <div className="desktop-header__lang-spinner"><Spinner /></div>}
                					</Modal>

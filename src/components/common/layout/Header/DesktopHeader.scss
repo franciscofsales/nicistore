@@ -251,12 +251,14 @@
 .desktop-header__lang-modal-item {
   align-self: stretch;
   flex: 1;
-  padding: 7px 0 7px 0;
+  padding: 20px 0 20px 15px;
   -webkit-transition: all .35s ease-out;
   -moz-transition: all .35s ease-out;
   -o-transition: all .35s ease-out;
   transition: all .35s ease-out;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   cursor: pointer;
   &:hover {
     background-color: rgba($color-body, 0.23);
@@ -271,4 +273,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.desktop-header__lang-flag {
+  padding: 0 15px 0 0;
+  height: 25px;
+  width: 35px;
+  object-fit: contain;
+  opacity: 0.82;
 }
