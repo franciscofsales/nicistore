@@ -13,12 +13,15 @@ import CartStore from '../../../../stores/Cart/CartStore';
 import DrawerStore from '../../../../stores/Application/DrawerStore';
 import IntlStore from '../../../../stores/Application/IntlStore';
 import triggerDrawer from '../../../../actions/Application/triggerDrawer';
+import setLocale from '../../../../actions/Application/setLocale';
 
 // Required components
 import Badge from '../../indicators/Badge';
+import Spinner from '../../indicators/Spinner';
 import CollectionTreeMenu from '../../navigation/CollectionTreeMenu';
 import MainNavigation from '../../navigation/MainNavigation';
 import Text from '../../typography/Text';
+import Modal from '../../modals/Modal';
 
 // Translation data for this component
 import intlData from './DesktopHeader.intl';
@@ -43,7 +46,9 @@ class DesktopHeader extends React.Component {
 		hasScrolledHeader: false,
 		hasAnimated: false,
 		isSearch: false,
-		searchTerm: ''
+		searchTerm: '',
+		showLangModal: false,
+		isChangingLang: false
 	};
 
 	//*** Component Lifecycle ***//
@@ -71,6 +76,20 @@ class DesktopHeader extends React.Component {
 	handleBtnClick = drawer => {
 		this.context.executeAction(triggerDrawer, drawer);
 	};
+
+	_handleNewLang = lang => {
+		this.context.executeAction(setLocale, lang);
+		this.setState({isChangingLang: true});
+		setTimeout(
+			()=> {
+				this.setState({isChangingLang: false, showLangModal: false});
+			}, 200
+		);
+	}
+
+	_handleLangModalClose = () => {
+		this.setState({showLangModal: false});
+	}
 
 	_calcScroll = header => {
 		const _window = window;
@@ -102,15 +121,15 @@ class DesktopHeader extends React.Component {
 
 	_keyPressInput = e => {
 		// if enter
-    if(e.keyCode === 13) {
-      if(this.state.searchTerm && this.state.searchTerm.length > 0){
-				this.context.router.transitionTo('product-search', {
-             locale: this.context.getStore(IntlStore).getCurrentLocale()
-         }, {term: this.state.searchTerm});
-				 this.setState({searchTerm: '', isSearch: false});
-			}
+	    if(e.keyCode === 13) {
+	      if(this.state.searchTerm && this.state.searchTerm.length > 0){
+					this.context.router.transitionTo('product-search', {
+	             locale: this.context.getStore(IntlStore).getCurrentLocale()
+	         }, {term: this.state.searchTerm});
+					 this.setState({searchTerm: '', isSearch: false});
+				}
+	    }
     }
-   }
 
 	//*** Template ***//
 
@@ -233,6 +252,23 @@ class DesktopHeader extends React.Component {
 									</Link>
 								</div>
 							))}
+							{this.state.showLangModal && (
+        						<Modal title={intlStore.getMessage(intlData, 'selectLanguage')}
+                           			onCloseClick={this.state.isChangingLang ? null : this._handleLangModalClose}>
+                           			{!this.state.isChangingLang ? (<div className="desktop-header__lang-modal-container">
+                           				<div className="desktop-header__lang-modal-item" onClick={this._handleNewLang.bind(null, 'pt')}>
+                           					Português
+                           				</div>
+                           				<div className="desktop-header__lang-modal-item" onClick={this._handleNewLang.bind(null, 'en')}>
+                           					English
+                           				</div>
+                           			</div>) : <div className="desktop-header__lang-spinner"><Spinner /></div>}
+               					</Modal>
+                           	)}
+							{!this.state.isSearch && (<div
+								className="desktop-header__lang fa fa-language"
+								onClick={() => this.setState({showLangModal: true})}
+							/>)}
 							{this.state.isSearch && (<div className="desktop-header__search-box-container">
 								<input
 									autoFocus

@@ -5,7 +5,8 @@ export default {
         logout: 'Logout',
         myAccount: 'My Account',
         register: 'Register',
-        admin: 'Admin'
+        admin: 'Admin',
+        selectLanguage: 'Select Language',
     },
     pt: {
         hi: 'Olá',
@@ -13,6 +14,7 @@ export default {
         logout: 'Logout',
         myAccount: 'A Minha Conta',
         register: 'Registar',
-        admin: 'Admin'
+        admin: 'Admin',
+        selectLanguage: 'Selecione Idioma'
     }
 };

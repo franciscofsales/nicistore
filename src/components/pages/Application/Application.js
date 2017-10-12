@@ -48,7 +48,8 @@ class Application extends React.Component {
         collectionsTree: this.context.getStore(CollectionsStore).getCollectionsTree(),
         notification: this.context.getStore(NotificationQueueStore).pop(),
         openedDrawer: this.context.getStore(DrawerStore).getOpenedDrawer(),
-        pageLoading: this.context.getStore(PageLoadingStore).isLoading()
+        pageLoading: this.context.getStore(PageLoadingStore).isLoading(),
+        currentLocale: this.context.getStore(IntlStore).getCurrentLocale()
     };
 
     //*** Component Lifecycle ***//
@@ -65,7 +66,8 @@ class Application extends React.Component {
             collectionsTree: nextProps._collectionsTree,
             notification: nextProps._notification,
             openedDrawer: nextProps._openedDrawer,
-            pageLoading: nextProps._pageLoading
+            pageLoading: nextProps._pageLoading,
+            currentLocale: nextProps._currentLocale,
         });
     }
 
@@ -172,14 +174,16 @@ Application = connectToStores(Application, [
     CollectionsStore,
     DrawerStore,
     NotificationQueueStore,
-    PageLoadingStore
+    PageLoadingStore,
+    IntlStore
 ], (context) => {
     return {
         _navCollections: context.getStore(CollectionsStore).getMainNavigationCollections(),
         _collectionsTree: context.getStore(CollectionsStore).getCollectionsTree(),
         _notification: context.getStore(NotificationQueueStore).pop(),
         _openedDrawer: context.getStore(DrawerStore).getOpenedDrawer(),
-        _pageLoading: context.getStore(PageLoadingStore).isLoading()
+        _pageLoading: context.getStore(PageLoadingStore).isLoading(),
+        _currentLocale: context.getStore(IntlStore).getCurrentLocale(),
     };
 });
 
