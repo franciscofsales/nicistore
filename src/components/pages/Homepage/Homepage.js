@@ -181,7 +181,7 @@ class Homepage extends React.Component {
                 </div>
                 <div className="wrap-container">
                   <div className="homepage-section homepage-section-padding">
-                    Collections
+                    {intlStore.getMessage(intlData, 'collectionList')}
                   </div>
                   <div className="homepage__collections">
                       <CollectionsList
