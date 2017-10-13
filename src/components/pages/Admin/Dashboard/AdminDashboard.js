@@ -31,7 +31,7 @@ class AdminDashboard extends React.Component {
     //*** Required Data ***//
 
     static fetchData = function (context, params, query, done) {
-        context.executeAction(fetchContents, {type: 'banner', tags: 'homepage'}, done);
+        context.executeAction(fetchContents, { tags: 'homepage'}, done);
     };
 
     //*** Component Lifecycle ***//
@@ -39,6 +39,7 @@ class AdminDashboard extends React.Component {
     componentDidMount() {
 
         // Component styles
+        context.executeAction(fetchContents, { tags: 'homepage'});
         require('./AdminDashboard.scss');
     }
 

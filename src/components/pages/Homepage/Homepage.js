@@ -54,6 +54,7 @@ class Homepage extends React.Component {
     //*** Initial State ***//
 
     state = {
+        images: this.context.getStore(ContentsListStore).getOrderedContentsOfType('image', ['homepage'], true),
         banners: this.context.getStore(ContentsListStore).getOrderedContentsOfType('banner', ['homepage'], true),
         articles: this.context.getStore(ContentsListStore).getOrderedContentsOfType('article', ['homepage'], true),
         collections: this.context.getStore(CollectionsStore).getOrderedCollections(['homepageFeatured'], true, 'homepageFeaturedOrder'),
@@ -72,6 +73,7 @@ class Homepage extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
+            images: nextProps._images,
             banners: nextProps._banners,
             articles: nextProps._articles,
             collections: nextProps._collections,
@@ -88,6 +90,7 @@ class Homepage extends React.Component {
         //
         // Helper methods & variables
         //
+
 
         let intlStore = this.context.getStore(IntlStore);
 
@@ -151,17 +154,25 @@ class Homepage extends React.Component {
         //
         // Return
         //
+        let backGroundStyle = {};
+        
+        if(this.state.images.length) {
+            for(let img of this.state.images){
+                if(img.enabled){
+                    backGroundStyle.backgroundImage = `url(//${img.images[0].url})`;
+                    break;
+                }
+            }
+        }
         return (
             <div className="homepage">
-                <div className="homepage-landing-image">
-                  <div className="homepage-landing-logo">
-
-                  </div>
+                <div className="homepage-landing-image" style={backGroundStyle}>
+                  <div className="homepage-landing-logo" />
                 </div>
-                <div className="homepage-section">
-                    <Carousel images={this.state.banners.filter(function (banner) {
+                <div className="homepage__banners">
+                    <Carousel className="homepage-banner-carousel" images={this.state.banners.filter(banner => {
                         return banner.body && banner.body.image;
-                    }).map(function (banner) {
+                    }).map( banner => {
                         return {
                             src: `//${banner.body.image.url}`,
                             link: banner.body.link
@@ -208,6 +219,7 @@ class Homepage extends React.Component {
  */
 Homepage = connectToStores(Homepage, [CollectionsStore, ProductsHomepageStore], (context) => {
     return {
+        _images: context.getStore(ContentsListStore).getOrderedContentsOfType('image', ['homepage'], true),
         _banners: context.getStore(ContentsListStore).getOrderedContentsOfType('banner', ['homepage'], true),
         _articles: context.getStore(ContentsListStore).getOrderedContentsOfType('article', ['homepage'], true),
         _collections: context.getStore(CollectionsStore).getOrderedCollections(['homepageFeatured'], true, 'homepageFeaturedOrder'),

@@ -9,6 +9,7 @@ import IntlStore from '../../../stores/Application/IntlStore';
 
 // Required components
 import Button from '../buttons/Button';
+import Modal from '../modals/Modal';
 
 // Translation data for this component
 import intlData from './ImageLibrary.intl';
@@ -25,6 +26,12 @@ class ImageLibrary extends React.Component {
         getStore: React.PropTypes.func.isRequired
     };
 
+    //*** Initial State ***//
+
+    state = {
+        showModal: false
+    };
+
     //*** Component Lifecycle ***//
 
     componentDidMount() {
@@ -36,7 +43,7 @@ class ImageLibrary extends React.Component {
     //*** View Controllers ***//
 
     handleViewURLClick = (idx) => {
-        alert(this.props.images[idx].url);
+        this.setState({showModal: true});
     };
 
     handleRemoveClick = (idx) => {
@@ -44,6 +51,10 @@ class ImageLibrary extends React.Component {
         images.splice(idx, 1);
         this.props.onChange(images);
     };
+
+    _handleModalClose = () => {
+        this.setState({showModal: false});
+    }
 
     //*** Template ***//
 
@@ -54,9 +65,17 @@ class ImageLibrary extends React.Component {
                 {this.props.images.map((img, idx) => {
                     return (
                         <div key={idx} className="image-library__placeholder">
-                            <img src={`//${img.url}`} />
+                            <img className="image-library__image" src={`//${img.url}`} />
                             <div className="image-library__placeholder-overlay">
                                 <div className="image-library__placeholder-overlay-content">
+                                    {this.state.showModal && (
+                                        <Modal title={intlStore.getMessage(intlData, 'viewURL')}
+                                            onCloseClick={this._handleModalClose}>
+                                            <div className="image-library__modal-container">
+                                                <p className="image-library__modal-url">{img.url}</p>
+                                            </div>
+                                        </Modal>
+                                    )}
                                     <div className="image-library__button">
                                         <Button type="default" onClick={this.handleViewURLClick.bind(null, idx)}>
                                             <FormattedMessage message={intlStore.getMessage(intlData, 'viewURL')}

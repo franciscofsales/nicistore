@@ -14,6 +14,7 @@ import CollectionsFeaturedHomepage from '../../../../stores/Collections/Collecti
 import IntlStore from '../../../../stores/Application/IntlStore';
 
 import bulkBannersUpdate from '../../../../actions/Admin/bulkBannersUpdate';
+import bulkImagesUpdate from '../../../../actions/Admin/bulkImagesUpdate';
 import updateHomepageFeaturedCollections from '../../../../actions/Admin/updateHomepageFeaturedCollections';
 
 // Required Components
@@ -39,6 +40,7 @@ class AdminHomepageSettings extends React.Component {
     //*** Initial State ***//
 
     state = {
+        images: this.context.getStore(ContentsListStore).getOrderedContentsOfType('image', ['homepage'], true),
         banners: this.context.getStore(ContentsListStore).getOrderedContentsOfType('banner', ['homepage'], true),
         collections: this.context.getStore(CollectionsStore).getCollections([], true),
         featuredCollections: this.context.getStore(CollectionsStore).getOrderedCollections(['homepageFeatured'], true, 'homepageFeaturedOrder'),
@@ -55,6 +57,7 @@ class AdminHomepageSettings extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
+            images: nextProps._images,
             banners: nextProps._banners,
             collections: nextProps._collections,
             featuredCollections: nextProps._featuredCollections,
@@ -73,6 +76,15 @@ class AdminHomepageSettings extends React.Component {
         this.setState({banners: banners});
     };
 
+    updateImagesOrder = (fromIdx, toIdx) => {
+        let images = this.state.images;
+        arrayMove(images, fromIdx, toIdx);
+        images.forEach(function (image, idx) {
+            image.metadata.order = idx;
+        });
+        this.setState({images: images});
+    };
+
     updateFeaturedCollectionsOrder = (fromIdx, toIdx) => {
         let featuredCollections = this.state.featuredCollections;
         arrayMove(featuredCollections, fromIdx, toIdx);
@@ -83,6 +95,22 @@ class AdminHomepageSettings extends React.Component {
     };
 
     //*** View Controllers ***//
+
+    handleMoveImageLeftClick = (idx) => {
+        if (idx > 0) {
+            this.updateImagesOrder(idx, idx-1);
+        }
+    };
+
+    handleMoveImageRightClick = (idx) => {
+        if (idx < this.state.featuredCollections.length-1) {
+            this.updateImagesOrder(idx, idx+1);
+        }
+    };
+
+    handleImagesUpdateClick = () => {
+        this.context.executeAction(bulkImagesUpdate, this.state.images);
+    };
 
     handleMoveFeaturedCollectionsLeftClick = (idx) => {
         if (idx > 0) {
@@ -122,12 +150,13 @@ class AdminHomepageSettings extends React.Component {
 
         let intlStore = this.context.getStore(IntlStore);
 
-        let featuredCollectionsOptions = this.state.collections.map(function (collection) {
+        let featuredCollectionsOptions = this.state.collections.map( collection => {
             return {
                 name: intlStore.getMessage(collection.name),
                 value: collection.id
             };
         });
+
 
         return (
             <div className="admin-homepage-settings">
@@ -191,6 +220,36 @@ class AdminHomepageSettings extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="admin-homepage-settings__ordering-block">
+                    <div className="admin-homepage-settings__ordering-label">
+                        <FormLabel>
+                            <FormattedMessage message={intlStore.getMessage(intlData, 'homepageImages')}
+                                              locales={intlStore.getCurrentLocale()} />
+                        </FormLabel>
+                    </div>
+                    <div className="admin-homepage-settings__ordering">
+                        <div className="admin-homepage-settings__ordering-items">
+                            {this.state.images.map((image, idx) => {
+                                return (
+                                    <DirectionButton key={idx}
+                                                     item={image}
+                                                     handleMoveLeftClick={this.handleMoveImageLeftClick.bind(null, idx)}
+                                                     handleMoveRightClick={this.handleMoveImageRightClick.bind(null, idx)} />
+                                );
+                            })}
+                        </div>
+                        <div className="admin-homepage-settings__ordering-actions">
+                            <Button className="admin-homepage-settings__ordering-button"
+                                    type="primary"
+                                    onClick={this.handleImagesUpdateClick}
+                                     loading={this.state.loading}>
+                                <FormattedMessage
+                                    message={intlStore.getMessage(intlData, 'update')}
+                                    locales={intlStore.getCurrentLocale()} />
+                            </Button>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -205,6 +264,7 @@ AdminHomepageSettings = connectToStores(AdminHomepageSettings, [
     ContentsListStore
 ], (context) => {
     return {
+        _images: context.getStore(ContentsListStore).getOrderedContentsOfType('image', ['homepage'], true),
         _banners: context.getStore(ContentsListStore).getOrderedContentsOfType('banner', ['homepage'], true),
         _collections: context.getStore(CollectionsStore).getCollections([], true),
         _featuredCollections: context.getStore(CollectionsStore).getOrderedCollections(['homepageFeatured'], true, 'homepageFeaturedOrder'),

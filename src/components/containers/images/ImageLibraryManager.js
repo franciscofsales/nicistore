@@ -78,6 +78,22 @@ class ImageLibraryManager extends React.Component {
         });
     };
 
+    _renderImageUploader = () => {
+        if(this.props.maxImages){
+            if(this.props.images.length >= this.props.maxImages){
+                return null;
+            }
+        }
+
+        return (
+            <div className="image-library-manager__upload">
+                <ImageUpload onSubmit={this.handleImageSubmit}
+                    disabled={this.state.fileUpload.loading} />
+            </div>
+        );
+        
+    }
+
     //*** Template ***//
 
     render() {
@@ -89,10 +105,7 @@ class ImageLibraryManager extends React.Component {
                                       locales={intlStore.getCurrentLocale()} />
                 </FormLabel>
                 <div className="image-library-manager__gallery">
-                    <div className="image-library-manager__upload">
-                        <ImageUpload onSubmit={this.handleImageSubmit}
-                                     disabled={this.state.fileUpload.loading} />
-                    </div>
+                    {this._renderImageUploader()}
                     <div className="image-library-manager__images">
                         <ImageLibrary images={this.props.images}
                                       onChange={this.props.onChange} />

@@ -2,6 +2,7 @@ export default {
     en: {
         article: 'Article',
         banner: 'Banner',
+        image: 'Image',
         enabledHeading: 'Enabled',
         homepage: 'Homepage',
         nameHeading: 'Name',
@@ -16,6 +17,7 @@ export default {
     pt: {
         article: 'Artigo',
         banner: 'Banner',
+        image: 'Imagem',
         enabledHeading: 'Activado',
         homepage: 'Página Principal',
         nameHeading: 'Nome',

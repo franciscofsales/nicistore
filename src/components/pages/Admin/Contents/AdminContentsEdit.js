@@ -177,8 +177,13 @@ class AdminContentsEdit extends React.Component {
                 } else if(this.state.content.type === 'banner') {
                     return (
                         <AdminContentsBanner body={this.state.content.body}
+                                             images={this.state.content.images}
                                              selectedLocale={this.state.selectedLocale}
                                              onChange={this.handleBodyChange} />
+                    );
+                } else if(this.state.content.type === 'image') {
+                    return (
+                        null
                     );
                 } else {
                     return (
@@ -264,9 +269,11 @@ class AdminContentsEdit extends React.Component {
                                             <Checkbox label={intlStore.getMessage(intlData, 'homepage')}
                                                       onChange={this.handleSectionChange.bind(null, 'homepage')}
                                                       checked={this.state.content.tags && this.state.content.tags.indexOf('homepage') !== -1} />
-                                            <Checkbox label={intlStore.getMessage(intlData, 'productPage')}
-                                                      onChange={this.handleSectionChange.bind(null, 'productPage')}
-                                                      checked={this.state.content.tags && this.state.content.tags.indexOf('productPage') !== -1} />
+                                            {this.state.content.type !== 'image' && (
+                                                <Checkbox label={intlStore.getMessage(intlData, 'productPage')}
+                                                          onChange={this.handleSectionChange.bind(null, 'productPage')}
+                                                          checked={this.state.content.tags && this.state.content.tags.indexOf('productPage') !== -1} />
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -285,27 +292,31 @@ class AdminContentsEdit extends React.Component {
                                 </div>
                                 <div className="admin-contents-edit__form-item">
                                     <ImageLibraryManager images={this.state.content.images}
-                                                         onChange={this.handleImageLibraryChange} />
+                                                         onChange={this.handleImageLibraryChange} 
+                                                         maxImages={this.state.content.type === 'image' || this.state.content.type === 'banner' ? 1 : null}
+                                    />
                                 </div>
                             </div>
-                            <div className="admin-contents-edit__right-column">
-                                <div className="admin-contents-edit__form-item">
-                                    <CollectionPicker collections={this.state.categories}
-                                                      checked={this.state.content.collections}
-                                                      onChange={this.handleCollectionPickerChange}>
-                                        <FormattedMessage message={intlStore.getMessage(intlData, 'categories')}
-                                                          locales={intlStore.getCurrentLocale()} />
-                                    </CollectionPicker>
-                                </div>
-                                <div className="admin-contents-edit__form-item">
-                                    <CollectionPicker collections={this.state.collections}
-                                                      checked={this.state.content.collections}
-                                                      onChange={this.handleCollectionPickerChange}>
-                                        <FormattedMessage message={intlStore.getMessage(intlData, 'collections')}
-                                                          locales={intlStore.getCurrentLocale()} />
-                                    </CollectionPicker>
-                                </div>
-                            </div>
+                            {this.state.content.type !== 'image' && (
+                                <div className="admin-contents-edit__right-column">
+                                    <div className="admin-contents-edit__form-item">
+                                        <CollectionPicker collections={this.state.categories}
+                                                          checked={this.state.content.collections}
+                                                          onChange={this.handleCollectionPickerChange}>
+                                            <FormattedMessage message={intlStore.getMessage(intlData, 'categories')}
+                                                              locales={intlStore.getCurrentLocale()} />
+                                        </CollectionPicker>
+                                    </div>
+                                    <div className="admin-contents-edit__form-item">
+                                        <CollectionPicker collections={this.state.collections}
+                                                          checked={this.state.content.collections}
+                                                          onChange={this.handleCollectionPickerChange}>
+                                            <FormattedMessage message={intlStore.getMessage(intlData, 'collections')}
+                                                              locales={intlStore.getCurrentLocale()} />
+                                        </CollectionPicker>
+                                    </div>
+                                </div>)
+                            }
                         </div>
                         <div className="admin-contents-edit__form-item">
                             {typeForm()}

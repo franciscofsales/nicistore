@@ -91,7 +91,8 @@ class AdminContentsAddForm extends React.Component {
 
         let contentTypeOptions = [
             {name: intlStore.getMessage(intlData, 'article'), value: 'article'},
-            {name: intlStore.getMessage(intlData, 'banner'), value: 'banner'}
+            {name: intlStore.getMessage(intlData, 'banner'), value: 'banner'},
+            {name: intlStore.getMessage(intlData, 'image'), value: 'image'}
         ];
 
         let fieldError = (field) => {

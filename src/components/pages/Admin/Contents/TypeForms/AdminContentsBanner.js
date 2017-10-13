@@ -27,12 +27,27 @@ class AdminContentsBanner extends React.Component {
         getStore: React.PropTypes.func.isRequired
     };
 
+    state = {
+        changingImage: false
+    }
+
     //*** Component Lifecycle ***//
 
     componentDidMount() {
 
         // Component styles
         require('./AdminContentsBanner.scss');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.images.length && !this.state.changingImage) {
+            this.setState({changingImage: true}, () => {
+                this.handleImageURLChange(nextProps.images[0].url);
+            })
+        }
+        if(this.state.body && this.state.body.url === nextProps.images[0].url){
+            this.setState({ changingImage: false});
+        }
     }
 
     //*** View Controllers ***//
@@ -77,7 +92,7 @@ class AdminContentsBanner extends React.Component {
                     {this.props.body.image && this.props.body.image.url ?
                         <div className="admin-contents-banner__image-placeholder">
                             <img src={`//${this.props.body.image.url}`} />
-                            <div className="admin-contents-banner__placeholder-overlay">
+                            {/*<div className="admin-contents-banner__placeholder-overlay">
                                 <div>
                                     <Button type="primary" onClick={this.handleRemoveImageClick}>
                                         <FormattedMessage
@@ -85,7 +100,7 @@ class AdminContentsBanner extends React.Component {
                                             locales={intlStore.getCurrentLocale()} />
                                     </Button>
                                 </div>
-                            </div>
+                            </div>*/}
                         </div>
                         :
                         <div>
