@@ -96,6 +96,13 @@ class AdminProductsEdit extends React.Component {
             product.variants = [];
         }
 
+        product.pricing = {
+            currency: 'EUR',
+            list: 0,
+            retail: 0,
+            vat: 0
+        };
+
         product.variants.push({
             name: {
                 en: '',
@@ -130,6 +137,14 @@ class AdminProductsEdit extends React.Component {
     handleVariantFieldChange = (index, field, value) => {
         let product = this.state.product;
         product.variants[index][field] = value;
+
+        if(field === 'stock'){
+            let totalStock = 0;
+            for(let variant of product.variants) {
+                totalStock += variant.stock;
+            }
+            product.stock = totalStock;
+        }
         this.setState({product: product});
     };
 
@@ -363,10 +378,12 @@ class AdminProductsEdit extends React.Component {
                                                 onChange={this.handleFieldChange.bind(null, 'sku')}
                                                 value={this.state.product.sku}
                                                 error={fieldError('sku')} />
-                                    <InputField label={intlStore.getMessage(intlData, 'stock')}
+                                    {(!this.state.product.variants || !this.state.product.variants.length) && (
+                                        <InputField label={intlStore.getMessage(intlData, 'stock')}
                                                 onChange={this.handleFieldChange.bind(null, 'stock')}
                                                 value={this.state.product.stock}
                                                 error={fieldError('stock')} />
+                                    )}
                                     <Select label={intlStore.getMessage(intlData, 'mainCategory')}
                                             placeholder
                                             options={productCategories}
@@ -416,32 +433,34 @@ class AdminProductsEdit extends React.Component {
                                           value={this.state.product.description ? this.state.product.description.pt : null}
                                           error={fieldError('description.pt')} />
                             </div>
-                            <div className="admin-products-edit__form-item">
-                                <InlineItems label={<FormattedMessage
-                                    message={intlStore.getMessage(intlData, 'pricing')}
-                                    locales={intlStore.getCurrentLocale()} />}>
-                                    <InputField label={intlStore.getMessage(intlData, 'currency')}
-                                                labelSize="small" labelWeight="normal"
-                                                value={this.state.product.pricing.currency}
-                                                onChange={this.handlePricingChange.bind(null, 'currency')}
-                                                error={fieldError('pricing.currency')} />
-                                    <InputField label={intlStore.getMessage(intlData, 'listPrice')}
-                                                labelSize="small" labelWeight="normal"
-                                                value={this.state.product.pricing.list}
-                                                onChange={this.handlePricingChange.bind(null, 'list')}
-                                                error={fieldError('pricing.list')} />
-                                    <InputField label={intlStore.getMessage(intlData, 'retailPrice')}
-                                                labelSize="small" labelWeight="normal"
-                                                value={this.state.product.pricing.retail}
-                                                onChange={this.handlePricingChange.bind(null, 'retail')}
-                                                error={fieldError('pricing.retail')} />
-                                    <InputField label={intlStore.getMessage(intlData, 'vat')}
-                                                labelSize="small" labelWeight="normal"
-                                                value={this.state.product.pricing.vat}
-                                                onChange={this.handlePricingChange.bind(null, 'vat')}
-                                                error={fieldError('pricing.vat')} />
-                                </InlineItems>
-                            </div>
+                            {(!this.state.product.variants || !this.state.product.variants.length) && (
+                                <div className="admin-products-edit__form-item">
+                                    <InlineItems label={<FormattedMessage
+                                        message={intlStore.getMessage(intlData, 'pricing')}
+                                        locales={intlStore.getCurrentLocale()} />}>
+                                        <InputField label={intlStore.getMessage(intlData, 'currency')}
+                                                    labelSize="small" labelWeight="normal"
+                                                    value={this.state.product.pricing.currency}
+                                                    onChange={this.handlePricingChange.bind(null, 'currency')}
+                                                    error={fieldError('pricing.currency')} />
+                                        <InputField label={intlStore.getMessage(intlData, 'listPrice')}
+                                                    labelSize="small" labelWeight="normal"
+                                                    value={this.state.product.pricing.list}
+                                                    onChange={this.handlePricingChange.bind(null, 'list')}
+                                                    error={fieldError('pricing.list')} />
+                                        <InputField label={intlStore.getMessage(intlData, 'retailPrice')}
+                                                    labelSize="small" labelWeight="normal"
+                                                    value={this.state.product.pricing.retail}
+                                                    onChange={this.handlePricingChange.bind(null, 'retail')}
+                                                    error={fieldError('pricing.retail')} />
+                                        <InputField label={intlStore.getMessage(intlData, 'vat')}
+                                                    labelSize="small" labelWeight="normal"
+                                                    value={this.state.product.pricing.vat}
+                                                    onChange={this.handlePricingChange.bind(null, 'vat')}
+                                                    error={fieldError('pricing.vat')} />
+                                    </InlineItems>
+                                </div>
+                            )}
                             <div className="admin-products-edit__form-item">
                                 <ImageLibraryManager images={this.state.product.images}
                                                      onChange={this.handleImageLibraryChange} />
