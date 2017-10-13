@@ -21,7 +21,10 @@ export default {
         stock: 'Stock',
         title: 'Edit Product',
         type: 'Type',
-        vat: '% VAT (Included)'
+        vat: '% VAT (Included)',
+        variants: 'Variants',
+        variant: 'Variant',
+        newVariant: 'New Variant'
     },
     pt: {
         back: 'Voltar',
@@ -45,6 +48,9 @@ export default {
         stock: 'Stock',
         title: 'Editar Produto',
         type: 'Tipo',
-        vat: '% IVA (Incluído)'
+        vat: '% IVA (Incluído)',
+        variants: 'Variantes',
+        variant: 'Variante',
+        newVariant: 'Adicionar Variante'
     }
 };

@@ -1,3 +1,5 @@
+@import '../../../../styles/variables.scss';
+
 /*
  * Header
  */
@@ -60,4 +62,21 @@
     &:not(:first-child) {
         margin-top: 30px;
     }
+
+    span {
+        font-weight: 600;
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
 }
+
+.admin-products-edit__separator {
+    height: 20px;
+}
+
+.admin-products-edit__variant-container {
+    margin-top: 40px;
+    border: 1px solid rgba($color-body, 0.28);
+    padding: 45px;
+}
+

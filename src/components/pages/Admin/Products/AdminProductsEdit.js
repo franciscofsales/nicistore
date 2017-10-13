@@ -90,6 +90,31 @@ class AdminProductsEdit extends React.Component {
 
     //*** View Controllers ***//
 
+    _handleAddNewVariant = () => {
+        let product = this.state.product;
+        if(!product.variants){
+            product.variants = [];
+        }
+
+        product.variants.push({
+            name: {
+                en: '',
+                pt: ''
+            },
+            sku: '',
+            stock: 0,
+            pricing: {
+                currency: 'EUR',
+                list: 0,
+                retail: 0,
+                vat: 0
+            },
+            images: []
+        });
+
+        this.setState({product: product});
+    }
+
     handleEnabledChange = () => {
         let product = this.state.product;
         product.enabled = !(product.enabled === true);
@@ -99,6 +124,12 @@ class AdminProductsEdit extends React.Component {
     handleFieldChange = (field, value) => {
         let product = this.state.product;
         product[field] = value;
+        this.setState({product: product});
+    };
+
+    handleVariantFieldChange = (index, field, value) => {
+        let product = this.state.product;
+        product.variants[index][field] = value;
         this.setState({product: product});
     };
 
@@ -147,15 +178,33 @@ class AdminProductsEdit extends React.Component {
         this.setState({product: product});
     };
 
+    handleVariantNameChange = (index, locale, value) => {
+        let product = this.state.product;
+        product.variants[index].name[locale] = value;
+        this.setState({product: product});
+    };
+
     handlePricingChange = (param, value) => {
         let product = this.state.product;
         product.pricing[param] = value;
+        this.setState({product: product});
+    }; 
+
+    handleVariantPricingChange = (index, param, value) => {
+        let product = this.state.product;
+        product.variants[index].pricing[param] = value;
         this.setState({product: product});
     };
 
     handleImageLibraryChange = (images) => {
         let product = this.state.product;
         product.images = images;
+        this.setState({product: product});
+    };    
+
+    handleVariantImageLibraryChange = (index, images) => {
+        let product = this.state.product;
+        product.variants[index].images = images;
         this.setState({product: product});
     };
 
@@ -397,7 +446,89 @@ class AdminProductsEdit extends React.Component {
                                 <ImageLibraryManager images={this.state.product.images}
                                                      onChange={this.handleImageLibraryChange} />
                             </div>
+
+                            <div className="admin-products-edit__form-item">
+                                <FormattedMessage
+                                    message={intlStore.getMessage(intlData, 'variants')}
+                                    locales={intlStore.getCurrentLocale()} />
+
+                                <div className="admin-products-edit__separator" />
+                                <Button type="primary" onClick={this._handleAddNewVariant}>
+                                    <FormattedMessage
+                                        message={intlStore.getMessage(intlData, 'newVariant')}
+                                        locales={intlStore.getCurrentLocale()} />
+                                </Button>   
+                            </div>
+
+                            {this.state.product && this.state.product.variants && (
+                                    this.state.product.variants.map((variant, idx) => {
+                                        return(
+                                            <div className="admin-products-edit__variant-container">
+                                                <div className="admin-products-edit__form-item">
+                                                    <InlineItems label={<FormattedMessage
+                                                        message={`${intlStore.getMessage(intlData, 'variant')} ${idx}`}
+                                                        locales={intlStore.getCurrentLocale()} />}
+                                                    >
+                                                        <InputField label={intlStore.getMessage(intlData, 'sku')}
+                                                                    onChange={this.handleVariantFieldChange.bind(null, idx, 'sku')}
+                                                                    value={this.state.product.variants[idx].sku}
+                                                                    error={fieldError('sku')} />
+                                                   
+                                                        <InputField label={intlStore.getMessage(intlData, 'name') + ' (EN)'}
+                                                                    onChange={this.handleVariantNameChange.bind(null, idx, 'en')}
+                                                                    value={this.state.product.variants[idx].name.en}
+                                                                    error={fieldError('nameEN')} />
+                                              
+                                                    
+                                                        <InputField label={intlStore.getMessage(intlData, 'name') + ' (PT)'}
+                                                                    onChange={this.handleVariantNameChange.bind(null, idx, 'pt')}
+                                                                    value={this.state.product.variants[idx].name.pt}
+                                                                    error={fieldError('namePT')} />
+
+                                                        <InputField label={intlStore.getMessage(intlData, 'stock')}
+                                                            onChange={this.handleVariantFieldChange.bind(null, idx, 'stock')}
+                                                            value={this.state.product.variants[idx].stock}
+                                                            error={fieldError('stock')} />
+                                                       
+                                                    </InlineItems>
+                                                </div>
+                                                <div className="admin-products-edit__form-item">
+                                                    <InlineItems label={<FormattedMessage
+                                                        message={intlStore.getMessage(intlData, 'pricing')}
+                                                        locales={intlStore.getCurrentLocale()} />}>
+                                                        <InputField label={intlStore.getMessage(intlData, 'currency')}
+                                                                    labelSize="small" labelWeight="normal"
+                                                                    value={this.state.product.variants[idx].pricing.currency}
+                                                                    onChange={this.handleVariantPricingChange.bind(null, idx, 'currency')}
+                                                                    error={fieldError('pricing.currency')} />
+                                                        <InputField label={intlStore.getMessage(intlData, 'listPrice')}
+                                                                    labelSize="small" labelWeight="normal"
+                                                                    value={this.state.product.variants[idx].pricing.list}
+                                                                    onChange={this.handleVariantPricingChange.bind(null, idx, 'list')}
+                                                                    error={fieldError('pricing.list')} />
+                                                        <InputField label={intlStore.getMessage(intlData, 'retailPrice')}
+                                                                    labelSize="small" labelWeight="normal"
+                                                                    value={this.state.product.variants[idx].pricing.retail}
+                                                                    onChange={this.handleVariantPricingChange.bind(null, idx, 'retail')}
+                                                                    error={fieldError('pricing.retail')} />
+                                                        <InputField label={intlStore.getMessage(intlData, 'vat')}
+                                                                    labelSize="small" labelWeight="normal"
+                                                                    value={this.state.product.variants[idx].pricing.vat}
+                                                                    onChange={this.handleVariantPricingChange.bind(null, idx, 'vat')}
+                                                                    error={fieldError('pricing.vat')} />
+                                                    </InlineItems>
+                                                </div>
+                                                <div className="admin-products-edit__form-item">
+                                                    <ImageLibraryManager images={this.state.product.variants[idx].images}
+                                                                         onChange={this.handleVariantImageLibraryChange.bind(null, idx)} />
+                                                </div>
+                                            </div>
+                                        );
+                                    })
+                                )}
                         </div>
+
+
                         <div className="admin-products-edit__right-column">
                             <div className="admin-products-edit__form-item">
                                 <CollectionPicker collections={this.state.categories}

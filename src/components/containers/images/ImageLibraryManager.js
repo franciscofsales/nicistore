@@ -36,7 +36,8 @@ class ImageLibraryManager extends React.Component {
 
     state = {
         fileUpload: this.context.getStore(FileUploadStore).getState(),
-        fieldErrors: {}
+        fieldErrors: {},
+        uploading: false
     };
 
     //*** Component Lifecycle ***//
@@ -51,16 +52,17 @@ class ImageLibraryManager extends React.Component {
 
         let fieldErrors = {};
         if (nextProps._error && nextProps._error.validation && nextProps._error.validation.keys) {
-            nextProps._error.validation.keys.forEach(function (field) {
+            nextProps._error.validation.keys.forEach(field => {
                 fieldErrors[field] = nextProps._error.validation.details[field];
             });
         }
 
         // Check if a file was uploaded
-        if (this.state.fileUpload.loading && !nextProps._fileUpload.loading && !nextProps._fileUpload.error) {
+        if (this.state.fileUpload.loading && !nextProps._fileUpload.loading && !nextProps._fileUpload.error && this.state.uploading) {
             let images = this.props.images;
             images.push(nextProps._fileUpload.file);
             this.props.onChange(images);
+            this.setState({uploading: false});
         }
 
         this.setState({
@@ -72,6 +74,7 @@ class ImageLibraryManager extends React.Component {
     //*** View Controllers ***//
 
     handleImageSubmit = (file) => {
+        this.setState({uploading: true});
         this.context.executeAction(uploadFile, {
             resource: 'products',
             file: file
@@ -87,7 +90,8 @@ class ImageLibraryManager extends React.Component {
 
         return (
             <div className="image-library-manager__upload">
-                <ImageUpload onSubmit={this.handleImageSubmit}
+                <ImageUpload 
+                    onSubmit={this.handleImageSubmit}
                     disabled={this.state.fileUpload.loading} />
             </div>
         );
