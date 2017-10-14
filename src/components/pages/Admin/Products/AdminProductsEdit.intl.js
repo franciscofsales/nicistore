@@ -24,7 +24,8 @@ export default {
         vat: '% VAT (Included)',
         variants: 'Variants',
         variant: 'Variant',
-        newVariant: 'New Variant'
+        newVariant: 'New Variant',
+        removeVariant: 'Remove Variant'
     },
     pt: {
         back: 'Voltar',
@@ -51,6 +52,7 @@ export default {
         vat: '% IVA (Incluído)',
         variants: 'Variantes',
         variant: 'Variante',
-        newVariant: 'Adicionar Variante'
+        newVariant: 'Adicionar Variante',
+        removeVariant: 'Remover Variante'
     }
 };
