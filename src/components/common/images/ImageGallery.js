@@ -22,6 +22,11 @@ class ImageGallery extends React.Component {
 
         // Component styles
         require('./ImageGallery.scss');
+        document.addEventListener('keydown', this._escFunction, false);
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener('keydown', this._escFunction, false);
     }
 
     //*** View Controllers ***//
@@ -32,6 +37,12 @@ class ImageGallery extends React.Component {
 
     _toggleOverlay = () => {
         this.setState({showingOverlay: !this.state.showingOverlay});
+    }
+
+    _escFunction = event => {
+        if(event.keyCode === 27) {
+            this.setState({showingOverlay: false});
+        }
     }
 
     //*** Template ***//
