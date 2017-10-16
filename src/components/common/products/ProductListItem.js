@@ -41,6 +41,58 @@ class ProductListItem extends React.Component {
         });
     }
 
+
+    _renderPrice = () => {
+        const {product} = this.props;
+
+        if(!product.variants || !product.variants.length){
+            return <FormattedNumber
+                        value={product.pricing.retail}
+                        style="currency"
+                        currency={product.pricing.currency} />
+        }
+        
+        let minPrice = -1;
+        let maxPrice = -1;
+        for( let variant of product.variants) {
+            if(minPrice === -1) {
+                minPrice = variant.pricing.retail;
+            }
+            if(maxPrice === -1) {
+                maxPrice = variant.pricing.retail;
+            }
+            if(variant.pricing.retail <= minPrice) {
+                minPrice = variant.pricing.retail;
+            }
+            if(variant.pricing.retail >= maxPrice) {
+                maxPrice = variant.pricing.retail;
+            }
+        }
+        if(minPrice === maxPrice){
+            return (
+                <div>
+                    <FormattedNumber
+                        value={minPrice}
+                        style="currency"
+                        currency={product.pricing.currency} />
+                </div>
+            );
+        }
+        return (
+            <div>
+                <FormattedNumber
+                    value={minPrice}
+                    style="currency"
+                    currency={product.pricing.currency} />
+                &nbsp;-&nbsp;
+                <FormattedNumber
+                    value={maxPrice}
+                    style="currency"
+                    currency={product.pricing.currency} />
+            </div>
+        );
+    }
+
     //*** Template ***//
 
     render() {
@@ -91,17 +143,14 @@ class ProductListItem extends React.Component {
                     {this.props.product.pricing ?
                         <div className="product-list-item__price" itemProp="offers" itemScope itemType="http://schema.org/Offer">
                             <div style={{display: 'none'}} itemProp="price">
-                                {this.props.product.pricing.retail}
+                                {this._renderPrice()}
                             </div>
                             <div style={{display: 'none'}} itemProp="priceCurrency">
                                 {this.props.product.pricing.currency}
                             </div>
                             <div>
                                 <Text size="medium" weight="bold">
-                                    <FormattedNumber
-                                        value={this.props.product.pricing.retail}
-                                        style="currency"
-                                        currency={this.props.product.pricing.currency} />
+                                    {this._renderPrice()}
                                 </Text>
                             </div>
                         </div>

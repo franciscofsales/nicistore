@@ -63,7 +63,8 @@ class SideCart extends React.Component {
     handleQuantityChange = (product, value) => {
         let payload = Object.assign({details: product.details}, {
             id: product.id,
-            quantity: value
+            quantity: value,
+            variantId: product.variantId
         });
         this.context.executeAction(addToCart, payload);
     };
@@ -86,11 +87,16 @@ class SideCart extends React.Component {
         // Process Subtotal
         let subTotal = {value: 0, currency: undefined};
         if (this.state.cart && this.state.cart.products.length > 0) {
-            this.state.cart.products.forEach(function (product) {
+            this.state.cart.products.forEach( product => {
                 if (!subTotal.currency) {
                     subTotal.currency = product.details.pricing.currency;
                 }
-                subTotal.value += product.details.pricing.retail * product.quantity;
+                if(product.variantId){
+                    const variant = product.details.variants.find(varint => varint.id === product.variantId);
+                    subTotal.value += variant.pricing.retail * product.quantity;    
+                } else {
+                    subTotal.value += product.details.pricing.retail * product.quantity;
+                }
             });
         }
 

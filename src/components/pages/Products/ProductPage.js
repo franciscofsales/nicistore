@@ -84,8 +84,13 @@ class ProductPage extends React.Component {
     getQuantityInCart = () => {
         let quantity = 0;
         if (this.props._product) {
-            this.props._cartProducts.filter((product) => {
-                return product.id === this.props._product.id;
+            this.props._cartProducts.filter(product => {
+                if(this.state.selectedVariant) {
+                    return (product.id === this.props._product.id && product.variantId === this.state.selectedVariant.id);
+                }
+                else{
+                    return product.id === this.props._product.id;
+                }
             }).forEach(function (product) {
                 quantity += product.quantity;
             });
@@ -104,7 +109,8 @@ class ProductPage extends React.Component {
         suggestions: this.context.getStore(ProductSuggestionsStore).getProducts(),
         suggestionsLoading: this.context.getStore(ProductSuggestionsStore).isLoading(),
         placeholderImage: undefined,
-        quantity: 1
+        quantity: 1,
+        selectedVariant: null
     };
 
     //*** Component Lifecycle ***//
@@ -166,9 +172,15 @@ class ProductPage extends React.Component {
 
     //*** View Controllers ***//
 
+    _handleVariantClick = variant => {
+        this.setState({selectedVariant: variant});
+    }
+
     handleAddToCartClick = () => {
+        
         let payload = Object.assign({details: this.state.product}, {
             id: this.state.product.id,
+            variantId: this.state.selectedVariant ? this.state.selectedVariant.id : null,
             quantity: this.getQuantityInCart() + this.state.quantity
         });
         this.setState({addingToCart: true});
@@ -187,6 +199,203 @@ class ProductPage extends React.Component {
       }
     }
 
+    _renderOptions = () => {
+        let intlStore = this.context.getStore(IntlStore);
+        const {product} = this.state;
+        if(!product.variants || !product.variants.length){
+            return null;
+        }
+        return (
+            <div className="product-page__options-container">
+                {
+                    product.variants.map(variant => {
+                        return (
+                        <div className={`product-page__option ${this.state.selectedVariant && variant.id === this.state.selectedVariant.id ? 'product-page__active-variant' : ''}`} onClick={this._handleVariantClick.bind(null, variant)}>
+                            <img className="product-page__variant-image" src={`//${variant.images[0].url}`} />
+                            <div className="product-page__variant-name">
+                                <FormattedMessage
+                                  message={intlStore.getMessage(variant.name)}
+                                  locales={intlStore.getCurrentLocale()} />
+                            </div>
+                        </div>)
+                    })
+                }
+            </div>
+        );
+    }
+
+    _renderGallery = () => {
+        if(this.state.selectedVariant) {
+            return (
+                <div className="product-page__gallery-container">
+                    {this.state.selectedVariant.images && this.state.selectedVariant.images.length > 0 ?
+                        <div className="product-page__gallery">
+                            <span style={{display: 'none'}} itemProp="image">
+                                {`//${this.state.selectedVariant.images[0].url}`}
+                            </span>
+                            <ImageGallery key={this.state.selectedVariant.id} images={this.state.selectedVariant.images} />
+                        </div>
+                        :
+                        <div className="product-page__gallery">
+                            <img src={this.state.placeholderImage} />
+                        </div>
+                    }
+                </div>
+            );
+        }
+        return (
+            <div className="product-page__gallery-container">
+                {this.state.product.images && this.state.product.images.length > 0 ?
+                    <div className="product-page__gallery">
+                        <span style={{display: 'none'}} itemProp="image">
+                            {`//${this.state.product.images[0].url}`}
+                        </span>
+                        <ImageGallery key={this.state.product.id} images={this.state.product.images} />
+                    </div>
+                    :
+                    <div className="product-page__gallery">
+                        <img src={this.state.placeholderImage} />
+                    </div>
+                }
+            </div>
+        );
+    }
+
+    _renderAddToCart = () =>{
+
+        let intlStore = this.context.getStore(IntlStore);
+
+        if (this.state.product.stock && (!this.state.product.variants || !this.state.product.variants.length) ) {
+
+            return (
+                <div className="product-page__add">
+                    <div className="product-page__quantity">
+                        <QuantitySelector value={this.state.quantity}
+                                          onChange={this.handleQuantityChange} />
+                    </div>
+                    <div className="product-page__add-buttons">
+                        {this.state.product.stock > 0 ?
+                            <Button type="primary"
+                                    onClick={this.handleAddToCartClick}
+                                    disabled={this.state.quantity <= 0 || this.state.cartLoading}>
+                                <FormattedMessage
+                                    message={intlStore.getMessage(intlData, 'addToCart')}
+                                    locales={intlStore.getCurrentLocale()} />
+                            </Button>
+                            :
+                            <Button type="primary" disabled={true}>
+                                <FormattedMessage
+                                    message={intlStore.getMessage(intlData, 'outOfStock')}
+                                    locales={intlStore.getCurrentLocale()} />
+                            </Button>
+                        }
+                    </div>
+                </div>
+            );
+        }
+        if (this.state.product.variants && this.state.selectedVariant) {
+             return (
+                <div className="product-page__add">
+                    <div className="product-page__quantity">
+                        <QuantitySelector value={this.state.quantity}
+                                          onChange={this.handleQuantityChange} />
+                    </div>
+                    <div className="product-page__add-buttons">
+                        {this.state.selectedVariant.stock > 0 ?
+                            <Button type="primary"
+                                    onClick={this.handleAddToCartClick}
+                                    disabled={this.state.quantity <= 0 || this.state.cartLoading}>
+                                <FormattedMessage
+                                    message={intlStore.getMessage(intlData, 'addToCart')}
+                                    locales={intlStore.getCurrentLocale()} />
+                            </Button>
+                            :
+                            <Button type="primary" disabled={true}>
+                                <FormattedMessage
+                                    message={intlStore.getMessage(intlData, 'outOfStock')}
+                                    locales={intlStore.getCurrentLocale()} />
+                            </Button>
+                        }
+                    </div>
+                </div>
+            );                       
+        }
+        return (
+            <div className="product-page__add">
+                <div className="product-page__quantity">
+                    <QuantitySelector value={this.state.quantity}
+                                      onChange={this.handleQuantityChange} />
+                </div>
+                <div className="product-page__add-buttons">
+                    <Button type="primary" disabled={true}>
+                        <FormattedMessage
+                            message={intlStore.getMessage(intlData, 'selectOption')}
+                            locales={intlStore.getCurrentLocale()} />
+                    </Button>
+                </div>
+            </div>
+        );          
+    }
+
+    _renderPrice = () => {
+        const {product} = this.state;
+
+        if(!product.variants || !product.variants.length){
+            return (<FormattedNumber
+                    value={product.pricing.retail}
+                    style="currency"
+                    currency={product.pricing.currency} />);
+        }
+
+        if(this.state.selectedVariant) { 
+            return (<FormattedNumber
+                    value={this.state.selectedVariant.pricing.retail}
+                    style="currency"
+                    currency={product.pricing.currency} />);
+
+        }
+        
+        let minPrice = -1;
+        let maxPrice = -1;
+        for( let variant of product.variants) {
+            if(minPrice === -1) {
+                minPrice = variant.pricing.retail;
+            }
+            if(maxPrice === -1) {
+                maxPrice = variant.pricing.retail;
+            }
+            if(variant.pricing.retail <= minPrice) {
+                minPrice = variant.pricing.retail;
+            }
+            if(variant.pricing.retail >= maxPrice) {
+                maxPrice = variant.pricing.retail;
+            }
+        }
+        if(minPrice === maxPrice){
+            return (
+                <div>
+                    <FormattedNumber
+                        value={minPrice}
+                        style="currency"
+                        currency={product.pricing.currency} />
+                </div>
+            );
+        }
+        return (
+            <div>
+                <FormattedNumber
+                    value={minPrice}
+                    style="currency"
+                    currency={product.pricing.currency} />
+                &nbsp;-&nbsp;
+                <FormattedNumber
+                    value={maxPrice}
+                    style="currency"
+                    currency={product.pricing.currency} />
+            </div>
+        );
+    }
+
     //*** Template ***//
 
     render() {
@@ -198,7 +407,6 @@ class ProductPage extends React.Component {
 
         let intlStore = this.context.getStore(IntlStore);
         let routeParams = {locale: intlStore.getCurrentLocale()}; // Base route params
-
         const shareButtons = [
           {
             id: 'facebook',
@@ -294,26 +502,20 @@ class ProductPage extends React.Component {
                         </div>
 
                         <div className="product-page__product" itemScope itemType="http://schema.org/Product">
-                            <div className="product-page__gallery-container">
-                                {this.state.product.images && this.state.product.images.length > 0 ?
-                                    <div className="product-page__gallery">
-                                        <span style={{display: 'none'}} itemProp="image">
-                                            {`//${this.state.product.images[0].url}`}
-                                        </span>
-                                        <ImageGallery key={this.state.product.id} images={this.state.product.images} />
-                                    </div>
-                                    :
-                                    <div className="product-page__gallery">
-                                        <img src={this.state.placeholderImage} />
-                                    </div>
-                                }
-                            </div>
+                            {this._renderGallery()}
                             <div className="product-page__details">
                                 <div className="product-page__name" itemProp="name">
                                     <Heading size="large">
                                         <FormattedMessage
                                             message={intlStore.getMessage(this.state.product.name)}
                                             locales={intlStore.getCurrentLocale()} />
+                                        {this.state.selectedVariant && (
+                                            <div>
+                                                <FormattedMessage
+                                                  message={intlStore.getMessage(this.state.selectedVariant.name)}
+                                                  locales={intlStore.getCurrentLocale()} />
+                                            </div>
+                                        )}
                                     </Heading>
                                 </div>
                                 {this.state.product.pricing ?
@@ -326,10 +528,7 @@ class ProductPage extends React.Component {
                                         </div>
                                         <div>
                                             <Text size="medium" weight="bold">
-                                                <FormattedNumber
-                                                    value={this.state.product.pricing.retail}
-                                                    style="currency"
-                                                    currency={this.state.product.pricing.currency} />
+                                                {this._renderPrice()}
                                             </Text>
                                         </div>
                                     </div>
@@ -341,30 +540,7 @@ class ProductPage extends React.Component {
                                         Ref: <span itemProp="sku">{this.state.product.sku}</span>
                                     </Text>
                                 </div>
-                                <div className="product-page__add">
-                                    <div className="product-page__quantity">
-                                        <QuantitySelector value={this.state.quantity}
-                                                          onChange={this.handleQuantityChange} />
-                                    </div>
-                                    <div className="product-page__add-buttons">
-                                        {this.state.product.stock > 0 ?
-                                            <Button type="primary"
-                                                    onClick={this.handleAddToCartClick}
-                                                    disabled={this.state.quantity <= 0 || this.state.cartLoading}>
-                                                <FormattedMessage
-                                                    message={intlStore.getMessage(intlData, 'addToCart')}
-                                                    locales={intlStore.getCurrentLocale()} />
-                                            </Button>
-                                            :
-                                            <Button type="primary" disabled={true}>
-                                                <FormattedMessage
-                                                    message={intlStore.getMessage(intlData, 'outOfStock')}
-                                                    locales={intlStore.getCurrentLocale()} />
-                                            </Button>
-                                        }
-                                    </div>
-                                </div>
-
+                                {this._renderAddToCart()}
                                 <div className="product-page__description">
                                     <div className="product-page__description-label">
                                         <Heading size="medium">
@@ -381,6 +557,19 @@ class ProductPage extends React.Component {
                                         </Text>
                                     </div>
                                 </div>
+
+                                {this.state.product.variants && (<div className="product-page__variants">
+                                    <div className="product-page__variants-label">
+                                        <Heading size="medium">
+                                            <FormattedMessage
+                                                message={intlStore.getMessage(intlData, 'options')}
+                                                locales={intlStore.getCurrentLocale()} />
+                                        </Heading>
+                                    </div>
+                                    <div className="product-page__variants-content" itemProp="variants">
+                                        {this._renderOptions()}
+                                    </div>
+                                </div>)}
 
                                 <div className="product-page__social-share">
                                   <div className="product-page__social-label">

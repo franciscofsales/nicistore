@@ -114,12 +114,14 @@
 
 // Description
 
+.product-page__variants, 
 .product-page__description {
     margin-top: 30px;
     padding-top: 30px;
     border-top: 1px solid #eeeeee;
 }
 
+.product-page__variants-content,
 .product-page__description-content {
     margin-top: 5px;
 }
@@ -224,4 +226,45 @@
 
 .product-page__email {
   background-color: $color-primary;
+}
+
+.product-page__options-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.product-page__option {
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  justify-content: center;
+  -webkit-transition: opacity .2s ease-out;
+  -moz-transition: opacity .2s ease-out;
+  -o-transition: opacity .2s ease-out;
+  transition: opacity .2s ease-out;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    opacity: 0.73;
+  }
+}
+
+.product-page__variant-image,
+.product-page__option {
+  width: 70px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.product-page__variant-name {
+  opacity: 0.88;
+}
+
+
+.product-page__active-variant {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  opacity: 0.72;
 }

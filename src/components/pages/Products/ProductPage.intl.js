@@ -6,7 +6,9 @@ export default {
         homepage: 'Homepage',
         outOfStock: 'Out of Stock',
         productsList: 'Products',
-        socialShare: 'Share'
+        socialShare: 'Share',
+        options: 'Options',
+        selectOption: 'Select Option',
     },
     pt: {
         addToCart: 'Comprar',
@@ -15,6 +17,8 @@ export default {
         homepage: 'Página Principal',
         outOfStock: 'Esgotado',
         productsList: 'Produtos',
-        socialShare: 'Partilha'
+        socialShare: 'Partilha',
+        options: 'Opções',
+        selectOption: 'Selecione opção',
     }
 };

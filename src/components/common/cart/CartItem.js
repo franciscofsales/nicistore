@@ -59,6 +59,20 @@ class CartItem extends React.Component {
             locale: intlStore.getCurrentLocale(),
             productId: product.id
         };
+        let variantId = this.props.product.variantId;
+        let variant = null;
+        if(variantId) {
+            variant = product.variants.find(variant => variant.id === variantId);
+        }
+
+        let {images} = product;
+        if(variant && variant.images) {
+            images = variant.images;
+        }
+        let {pricing} = product;
+        if(variant) {
+            pricing = variant.pricing;
+        }
 
         return (
             <div className="cart-item">
@@ -66,7 +80,7 @@ class CartItem extends React.Component {
                     <Link className="cart-item__link"
                           to="product" params={linkParams}
                           onClick={this.handleLinkClick}>
-                        <img className="cart-item__image" src={product.images && product.images.length > 0 ? `//${product.images[0].url}` : this.state.placeholderImage} />
+                        <img className="cart-item__image" src={images && images.length > 0 ? `//${images[0].url}` : this.state.placeholderImage} />
                     </Link>
                 </div>
                 <div className="cart-item__details">
@@ -77,14 +91,16 @@ class CartItem extends React.Component {
                                   onClick={this.handleLinkClick}>
                                 <FormattedMessage message={intlStore.getMessage(product.name)}
                                                   locales={intlStore.getCurrentLocale()} />
+                                {variant && (<FormattedMessage message={` - ${intlStore.getMessage(variant.name)}`}
+                                                  locales={intlStore.getCurrentLocale()} />)}
                             </Link>
                         </Text>
                     </div>
                     <div className="cart-item__price">
                         <Text size="small" weight="bold">
-                            <FormattedNumber value={product.pricing.retail}
+                            <FormattedNumber value={pricing.retail}
                                              style="currency"
-                                             currency={product.pricing.currency} />
+                                             currency={pricing.currency} />
                         </Text>
                     </div>
                     <div className="cart-item__quantity">
