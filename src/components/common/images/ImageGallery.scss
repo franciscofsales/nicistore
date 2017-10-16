@@ -50,3 +50,9 @@
         width: 100%;
     }
 }
+
+.image-gallery__fullscreen {
+    width: 100%;
+    height:  100%;
+    object-fit: contain;
+}

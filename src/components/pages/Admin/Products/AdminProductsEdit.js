@@ -588,13 +588,13 @@ class AdminProductsEdit extends React.Component {
                                                     <ImageLibraryManager images={this.state.product.variants[idx].images}
                                                                          onChange={this.handleVariantImageLibraryChange.bind(null, idx)} />
                                                 </div>
-                                                <div className="admin-products-edit__form-item">
+                                                {/*<div className="admin-products-edit__form-item">
                                                     <Button type="secondary" onClick={this._handleRemoveVariant.bind(null, idx)}>
                                                         <FormattedMessage
                                                             message={intlStore.getMessage(intlData, 'removeVariant')}
                                                             locales={intlStore.getCurrentLocale()} />
                                                     </Button>   
-                                                </div>
+                                                </div>*/}
                                             </div>
                                         );
                                     })

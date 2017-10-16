@@ -399,7 +399,7 @@ class ProductPage extends React.Component {
     //*** Template ***//
 
     render() {
-
+        // console.log(window);
         //
         // Helper methods & variables
         //
@@ -408,31 +408,31 @@ class ProductPage extends React.Component {
         let intlStore = this.context.getStore(IntlStore);
         let routeParams = {locale: intlStore.getCurrentLocale()}; // Base route params
         const shareButtons = [
-          {
-            id: 'facebook',
-            icon: 'facebook',
-            url: `https://facebook.com/sharer/sharer.php?u=${window.location.href}`
-          },
-          {
-            id: 'twitter',
-            icon: 'twitter',
-            url: `https://twitter.com/intent/tweet/?text=${intlStore.getMessage(this.state.product.name)};url=${window.location.href}`
-          },
-          {
-            id: 'google',
-            icon: 'google-plus',
-            url: `https://plus.google.com/share?url=${window.location.href}`
-          },
-          {
-            id: 'pinterest',
-            icon: 'pinterest-p',
-            url: `https://pinterest.com/pin/create/button/?url=${window.location.href}&media=${window.location.href}&description=${intlStore.getMessage(this.state.product.name)}`
-          },
-          {
-            id: 'email',
-            icon: 'envelope',
-            url: `mailto:?subject=${intlStore.getMessage(this.state.product.name)}&body=${window.location.href}`
-          }
+          // {
+          //   id: 'facebook',
+          //   icon: 'facebook',
+          //   url: `https://facebook.com/sharer/sharer.php?u=${window.location.href}`
+          // },
+          // {
+          //   id: 'twitter',
+          //   icon: 'twitter',
+          //   url: `https://twitter.com/intent/tweet/?text=${intlStore.getMessage(this.state.product.name)};url=${window.location.href}`
+          // },
+          // {
+          //   id: 'google',
+          //   icon: 'google-plus',
+          //   url: `https://plus.google.com/share?url=${window.location.href}`
+          // },
+          // {
+          //   id: 'pinterest',
+          //   icon: 'pinterest-p',
+          //   url: `https://pinterest.com/pin/create/button/?url=${window.location.href}&media=${window.location.href}&description=${intlStore.getMessage(this.state.product.name)}`
+          // },
+          // {
+          //   id: 'email',
+          //   icon: 'envelope',
+          //   url: `mailto:?subject=${intlStore.getMessage(this.state.product.name)}&body=${window.location.href}`
+          // }
         ];
 
 
