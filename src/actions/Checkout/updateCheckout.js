@@ -30,9 +30,10 @@ export default function updateCheckout(context, payload, done) {
                 ga.plugin.execute('set', '&cu', product.details.pricing.currency);
                 ga.plugin.execute('ec', 'addProduct', {
                     id: product.id,
+                    variantId: product.variantId,
                     name: context.getStore(IntlStore).getMessage(product.details.name),
                     category: categoryName,
-                    price: product.details.pricing.retail,
+                    price: product.variantId ? product.details.variants.find(varnt => varnt.id === product.variantId).pricing.retail : product.details.pricing.retail,
                     quantity: product.quantity
                 });
             });

@@ -31,6 +31,17 @@ class OrderSummary extends React.Component {
         require('./OrderSummary.scss');
     }
 
+    _getProductName = product => {
+        let intlStore = this.context.getStore(IntlStore);
+        let variant = null;
+        if(product.variantId){
+            variant = product.details.variants.find(varint => varint.id === product.variantId);
+        }
+        return variant ? 
+            `${intlStore.getMessage(product.details.name)} - ${intlStore.getMessage(variant.name)}` :
+            intlStore.getMessage(product.details.name)
+    }
+
     //*** Template ***//
 
     render() {
@@ -69,23 +80,27 @@ class OrderSummary extends React.Component {
                             </Text>
                         </div>
                     </div>
-                    {this.props.checkout.cart.products.map(function (product, idx) {
+                    {this.props.checkout.cart.products.map( (product, idx) => {
+                        let variant = null;
+                        if(product.variantId){
+                            variant = product.details.variants.find(varint => varint.id === product.variantId);
+                        }
                         return (
                             <div key={idx} className="order-summary__row order-summary__item">
                                 <div className="order-summary__list-name">
                                     <Breakpoint point="handhelds">
                                         <Text size="small">
-                                            {intlStore.getMessage(product.details.name)}
+                                            {this._getProductName(product)}
                                         </Text>
                                     </Breakpoint>
                                     <Breakpoint point="medium-screens">
                                         <Text>
-                                            {intlStore.getMessage(product.details.name)}
+                                            {this._getProductName(product)}
                                         </Text>
                                     </Breakpoint>
                                     <Breakpoint point="wide-screens">
                                         <Text>
-                                            {intlStore.getMessage(product.details.name)}
+                                            {this._getProductName(product)}
                                         </Text>
                                     </Breakpoint>
                                 </div>
@@ -96,17 +111,17 @@ class OrderSummary extends React.Component {
                                     &nbsp;x&nbsp;
                                     <Text>
                                         <FormattedNumber
-                                            value={product.details.pricing.retail}
+                                            value={variant ? variant.pricing.retail : product.details.pricing.retail}
                                             style="currency"
-                                            currency={product.details.pricing.currency} />
+                                            currency={variant ? variant.pricing.currency : product.details.pricing.currency} />
                                     </Text>
                                 </div>
                                 <div className="order-summary__list-total">
                                     <Text>
                                         <FormattedNumber
-                                            value={product.quantity * product.details.pricing.retail}
+                                            value={variant ? product.quantity * variant.pricing.retail : product.quantity * product.details.pricing.retail}
                                             style="currency"
-                                            currency={product.details.pricing.currency} />
+                                            currency={variant ? variant.pricing.currency : product.details.pricing.currency} />
                                     </Text>
                                 </div>
                             </div>
