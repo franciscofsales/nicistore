@@ -38,6 +38,22 @@ class OrderDetails extends React.Component {
         require('./OrderDetails.scss');
     }
 
+    _computeValue = product => {
+
+        if(!product.variantId){
+            return (<FormattedNumber
+                    value={product.pricing.retail}
+                    style="currency"
+                    currency={this.props.order.checkout.currency} />);
+        }
+        const variant = product.details.variants.find(varint => varint.id === product.variantId);
+        return (<FormattedNumber
+                value={variant.pricing.retail}
+                style="currency"
+                currency={this.props.order.checkout.currency} />);
+
+    }
+
     //*** Template ***//
 
     render() {
@@ -61,10 +77,16 @@ class OrderDetails extends React.Component {
                               locales={intlStore.getCurrentLocale()} />
         ];
         let rows = this.props.order.checkout.cart.products.map((product) => {
+            let variant = null;
+            if(product.variantId){
+                variant = product.details.variants.find(varint => varint.id === product.variantId);
+            }
             return {
                 data: [
                     <Text size="medium">
-                        <FormattedMessage message={intlStore.getMessage(product.details.name)}
+                        <FormattedMessage message={
+                            `${intlStore.getMessage(product.details.name)}${variant ? ' - ' + intlStore.getMessage(variant.name): ''}`
+                        }
                                           locales={intlStore.getCurrentLocale()} />
                     </Text>,
                     <span className="order-details__link">
@@ -74,9 +96,7 @@ class OrderDetails extends React.Component {
                     </span>,
                     <Text size="medium">{product.details.sku}</Text>,
                     <Text size="medium">{product.quantity}</Text>,
-                    <FormattedNumber value={product.details.pricing.retail}
-                                     style="currency"
-                                     currency={this.props.order.checkout.currency} />
+                    this._computeValue(product)
                 ]
             };
         });
