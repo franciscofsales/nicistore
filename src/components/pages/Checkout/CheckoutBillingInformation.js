@@ -98,7 +98,7 @@ class CheckoutBillingInformation extends React.Component {
         //
 
         let intlStore = this.context.getStore(IntlStore);
-
+        console.log(this.props);
         let paymentOptions = (this.props.paymentOptions) ? this.props.paymentOptions.map((paymentMethod) => {
             let name = (
                 <FormattedMessage message={intlStore.getMessage(paymentMethod.label)}
